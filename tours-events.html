@@ -1,1 +1,224 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تنظيم الرحلات والفعاليات - راوند تريب</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- الهيدر والشعار -->
+    <header class="header">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="logo.png" alt="شعار راوند تريب" class="logo" onerror="this.style.display='none'">
+            </a>
+            
+            <div class="company-info">
+                <div class="company-name-ar">راوند تريب</div>
+                <div class="company-name-en english-font">ROUND TRIP</div>
+                <div class="company-tagline">رحلات لا تُنسى، تجارب استثنائية</div>
+            </div>
+        </div>
+        
+        <div class="contact-header">
+            <div class="whatsapp-btn pulse" onclick="openWhatsApp('96565750302')">
+                <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
+            </div>
+            
+            <div class="phone-numbers-container">
+                <div class="phone-number" onclick="openWhatsApp('96565750302')">
+                    <img src="https://flagcdn.com/w20/kw.png" class="flag-icon" alt="علم الكويت">
+                    <a href="https://wa.me/96565750302" target="_blank">+965 65750302</a>
+                </div>
+                
+                <div class="phone-number" onclick="openWhatsApp('966569425758')">
+                    <img src="https://flagcdn.com/w20/sa.png" class="flag-icon" alt="علم السعودية">
+                    <a href="https://wa.me/966569425758" target="_blank">+966 569425758</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
+    <!-- محتوى صفحة تنظيم الرحلات -->
+    <div class="page-header">
+        <h1 class="page-title">تنظيم الرحلات والفعاليات</h1>
+        <p class="page-subtitle">تنظيم برامج سياحية مخصصة، حجوزات تذاكر معالم سياحية وفعاليات وأنشطة ترفيهية</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+    </div>
+    
+    <div class="page-content">
+        <div class="container">
+            <div class="booking-section">
+                <h2 class="section-title">طلب تنظيم رحلة/فعالية</h2>
+                
+                <form id="toursForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="toursName" class="required">الاسم</label>
+                            <input type="text" id="toursName" name="toursName" required placeholder="أدخل اسمك">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="toursPhone" class="required" style="text-align: right;">رقم الهاتف</label>
+                            <input type="tel" id="toursPhone" name="toursPhone" required placeholder="ادخل رقم الهاتف">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="toursEmail">البريد الإلكتروني (اختياري)</label>
+                            <input type="email" id="toursEmail" name="toursEmail" placeholder="name@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="toursType" class="required">نوع الخدمة المطلوبة</label>
+                            <select id="toursType" name="toursType" required>
+                                <option value="">اختر نوع الخدمة</option>
+                                <option value="برنامج سياحي">برنامج سياحي مخصص</option>
+                                <option value="معالم سياحية">تذاكر معالم سياحية</option>
+                                <option value="فعاليات">حجوزات فعاليات وأنشطة</option>
+                                <option value="رحلات جماعية">رحلات جماعية منظمة</option>
+                                <option value="أخرى">أخرى</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="toursDestination" class="required">الوجهة المطلوبة</label>
+                            <input type="text" id="toursDestination" name="toursDestination" required placeholder="البلد أو المدينة">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="toursPeople" class="required">عدد الأشخاص</label>
+                            <input type="number" id="toursPeople" name="toursPeople" min="1" required placeholder="مثال: 4">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group date-time-input">
+                            <label for="toursStartDate" class="required">تاريخ السفر المتوقع</label>
+                            <input type="date" id="toursStartDate" name="toursStartDate" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="toursDuration">مدة الرحلة (أيام)</label>
+                            <input type="number" id="toursDuration" name="toursDuration" min="1" placeholder="مثال: 5">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="toursBudget">الميزانية التقريبية للشخص</label>
+                            <div class="budget-currency-container">
+                                <input type="number" id="toursBudget" name="toursBudget" placeholder="المبلغ">
+                                <select id="toursCurrency" name="toursCurrency">
+                                    <option value="دينار كويتي">دينار كويتي</option>
+                                    <option value="ريال سعودي">ريال سعودي</option>
+                                    <option value="درهم إماراتي">درهم إماراتي</option>
+                                    <option value="دولار أمريكي">دولار أمريكي</option>
+                                    <option value="يورو">يورو</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="toursActivities" class="required">الأنشطة المطلوبة (يمكن اختيار أكثر من واحد)</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activityHotel" name="tourActivity" value="حجز فنادق">
+                                    <label for="activityHotel">حجز فنادق</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activityTickets" name="tourActivity" value="تذاكر فعاليات">
+                                    <label for="activityTickets">تذاكر فعاليات</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activityMonuments" name="tourActivity" value="معالم سياحية">
+                                    <label for="activityMonuments">معالم سياحية</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="activityTransport" name="tourActivity" value="مواصلات">
+                                    <label for="activityTransport">مواصلات</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="toursSpecialRequests">تفاصيل إضافية أو طلبات خاصة</label>
+                        <textarea id="toursSpecialRequests" name="toursSpecialRequests" rows="4" placeholder="اذكر أي تفاصيل إضافية مثل: المعالم المفضلة، نوع الفعاليات، متطلبات خاصة..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fab fa-whatsapp whatsapp-icon"></i> إرسال طلب تنظيم الرحلة
+                    </button>
+                </form>
+                
+                <div class="form-instructions">
+                    <h4><i class="fas fa-info-circle"></i> كيفية إكمال الحجز:</h4>
+                    <ol>
+                        <li>املأ جميع البيانات المطلوبة في النموذج أعلاه</li>
+                        <li>اضغط على زر "إرسال طلب تنظيم الرحلة"</li>
+                        <li>سيتم فتح تطبيق واتساب على جهازك تلقائياً</li>
+                        <li>ستجد الرسالة جاهزة مع كل بياناتك، فقط اضغط "إرسال"</li>
+                        <li>سنتصل بك خلال 24 ساعة لتأكيد الحجز وتفاصيل الدفع</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>راوند تريب</h3>
+                <p>خبراء في تنظيم الرحلات السياحية بشكل كامل ، نقدم خدمات حجوزات فنادق وتأشيرات وتأجير سيارات وباقات سياحية مفصلة. نضمن لعملائنا تجربة سفر استثنائية بأسعار تنافسية وخدمة مميزة.</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/roundtripco" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@roundtripco" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.snapchat.com/add/roundtripco" target="_blank"><i class="fab fa-snapchat"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul style="list-style: none; line-height: 2.5;">
+                    <li><a href="index.html" style="color: white; text-decoration: none;">الرئيسية</a></li>
+                    <li><a href="car-rental.html" style="color: white; text-decoration: none;">تأجير السيارات</a></li>
+                    <li><a href="driver-service.html" style="color: white; text-decoration: none;">سائق خاص</a></li>
+                    <li><a href="honeymoon.html" style="color: white; text-decoration: none;">شهر العسل</a></li>
+                    <li><a href="tours-events.html" style="color: white; text-decoration: none;">تنظيم الرحلات</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section footer-contact">
+                <h3>تواصل معنا</h3>
+                
+                <div class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span><a href="mailto:sales@roundtripco.net" style="color: white; text-decoration: none;">sales@roundtripco.net</a></span>
+                </div>
+                
+                <div class="footer-contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span>السبت - الخميس: 9ص - 11م</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2026 راوند تريب - جميع الحقوق محفوظة. | تصميم وتطوير: فريق راوند تريب</p>
+            <p style="margin-top: 10px; font-size: 14px;" class="english-font">ROUND TRIP Travel Agency</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
