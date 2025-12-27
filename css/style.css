@@ -177,10 +177,10 @@ body {
 
 /* ===== المحتوى الرئيسي ===== */
 main {
-    flex: 1;
+    flex: 1; /* هذا هو المفتاح - يأخذ المساحة المتبقية */
     width: 100%;
-    padding-top: 100px; /* سيتم ضبطه ديناميكياً بواسطة JS */
-    min-height: calc(100vh - 200px); /* يضمن أن الفوتر يبقى في الأسفل */
+    padding-top: 100px;
+    display: block;
 }
 
 /* ===== البانر المتحرك ===== */
@@ -357,419 +357,24 @@ main {
     border-color: var(--olive-dark);
 }
 
-/* ===== الصفحات الداخلية ===== */
-.page-header {
-    background: linear-gradient(135deg, var(--olive-dark), var(--sage-green));
-    color: white;
-    padding: 40px 5% 30px;
-    text-align: center;
-    border-radius: 0 0 20px 20px;
-    margin-bottom: 30px;
-}
-
-.page-title {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.page-subtitle {
-    font-size: 16px;
-    opacity: 0.9;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.back-btn {
-    background: rgba(255,255,255,0.2);
-    color: white;
-    border: 2px solid white;
-    padding: 10px 25px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 15px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s;
-    font-size: 16px;
-    text-decoration: none;
-}
-
-.back-btn:hover {
-    background: white;
-    color: var(--olive-dark);
-}
-
-.page-content {
-    max-width: 1200px;
-    margin: 0 auto 40px;
-    padding: 0 15px;
-}
-
-/* ===== تأجير سيارات مع سائق خاص ===== */
-.driver-service-section {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 30px 20px;
-    margin: 40px auto;
-    max-width: 1000px;
-    box-shadow: 0 8px 25px rgba(85, 104, 89, 0.1);
-    border: 2px solid var(--light-beige);
-    position: relative;
-    overflow: hidden;
-}
-
-.driver-service-section:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 6px;
-    background: linear-gradient(to left, var(--sage-green), var(--olive-dark));
-}
-
-.driver-features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.driver-feature {
-    background: var(--light-beige);
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.driver-feature i {
-    font-size: 35px;
-    color: var(--olive-dark);
-    margin-bottom: 10px;
-}
-
-/* ===== نموذج الحجز ===== */
-.booking-section {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 30px 20px;
-    margin: 40px auto;
-    max-width: 850px;
-    box-shadow: 0 8px 25px rgba(85, 104, 89, 0.1);
-    border: 2px solid var(--light-beige);
-    position: relative;
-    overflow: hidden;
-}
-
-.booking-section:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 6px;
-    background: linear-gradient(to left, var(--sage-green), var(--olive-dark));
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--olive-dark);
-    font-weight: 700;
-    font-size: 14px;
-}
-
-.required:after {
-    content: " *";
-    color: #e74c3c;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 14px 16px;
-    border: 2px solid var(--light-beige);
-    border-radius: 10px;
-    font-size: 16px;
-    transition: all 0.3s;
-    background: #f8fafc;
-    font-family: 'Cairo', sans-serif;
-    text-align: right;
-    cursor: pointer;
-}
-
-/* تحسين حقول التاريخ والوقت */
-.date-time-input {
-    position: relative;
-    cursor: pointer;
-}
-
-.date-time-input input {
-    cursor: pointer;
-    background-color: white;
-}
-
-.date-time-input:after {
-    content: '\f073';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--olive-dark);
-    pointer-events: none;
-    font-size: 16px;
-}
-
-.time-input:after {
-    content: '\f017';
-}
-
-/* ===== حاوية زر الإرسال ===== */
-.submit-btn-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-.submit-btn {
-    background: linear-gradient(135deg, var(--sage-green), var(--olive-dark));
-    color: white;
-    border: none;
-    padding: 16px 35px;
-    font-size: 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    width: 100%;
-    max-width: 350px;
-    font-weight: bold;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-family: 'Cairo', sans-serif;
-}
-
-.submit-btn:hover {
-    background: linear-gradient(135deg, var(--olive-dark), var(--sage-green));
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(85, 104, 89, 0.3);
-}
-
-.whatsapp-icon {
-    font-size: 22px;
-}
-
-/* ===== التوجيهات داخل النماذج ===== */
-.form-instructions {
-    background: var(--light-beige);
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: 30px;
-    border-right: 4px solid var(--sage-green);
-}
-
-.form-instructions h4 {
-    color: var(--olive-dark);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 18px;
-}
-
-.form-instructions ol {
-    padding-right: 20px;
-    line-height: 1.8;
-    font-size: 14px;
-}
-
-/* ===== خيارات متعددة ===== */
-.checkbox-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 12px;
-    margin-top: 8px;
-}
-
-.checkbox-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.checkbox-item input[type="checkbox"] {
-    width: auto;
-}
-
-/* ===== الشروط العامة ===== */
-.terms-section {
-    background: var(--light-beige);
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 30px;
-    border-right: 4px solid var(--sage-green);
-}
-
-.terms-section h3 {
-    color: var(--olive-dark);
-    margin-bottom: 15px;
-    font-size: 20px;
-}
-
-.terms-list {
-    list-style: none;
-    padding-right: 0;
-}
-
-.terms-list li {
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(85, 104, 89, 0.1);
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    line-height: 1.5;
-    font-size: 14px;
-}
-
-.terms-list li:last-child {
-    border-bottom: none;
-}
-
-.terms-list i {
-    color: var(--olive-dark);
-    margin-top: 3px;
-    font-size: 14px;
-}
-
-/* ===== خيارات أعمار الأطفال ===== */
-.child-age-group {
-    display: none;
-    margin-top: 12px;
-    padding: 12px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-}
-
-.child-age-group .form-row {
-    margin-top: 8px;
-}
-
-/* ===== توزيع الأشخاص على الغرف ===== */
-.room-distribution {
-    display: none;
-    margin-top: 12px;
-    padding: 12px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-}
-
-.room-distribution .form-row {
-    margin-top: 8px;
-}
-
-.room-occupancy {
-    display: none;
-    margin-top: 12px;
-    padding: 12px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-}
-
-.room-occupancy-item {
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.room-occupancy-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.room-occupancy-item h5 {
-    color: var(--olive-dark);
-    margin-bottom: 8px;
-    font-size: 14px;
-}
-
-/* ===== أعمار الأطفال في الفنادق ===== */
-.children-ages-container {
-    display: none;
-    margin-top: 12px;
-    padding: 12px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-}
-
-.age-select-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 8px;
-    margin-top: 8px;
-}
-
-/* ===== خيارات مكان التسليم ===== */
-.return-options {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-.return-option {
-    flex: 1;
-    text-align: center;
-    padding: 12px;
-    border: 2px solid var(--light-beige);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.return-option:hover {
-    border-color: var(--sage-green);
-}
-
-.return-option.selected {
-    border-color: var(--olive-dark);
-    background-color: rgba(85, 104, 89, 0.05);
-}
-
-/* ===== الفوتر ===== */
+/* ===== الفوتر (معدل) ===== */
 .footer {
     background: linear-gradient(135deg, var(--olive-dark) 0%, #445a4a 100%);
     color: white;
-    padding: 40px 15px 20px;
-    margin-top: 40px;
+    padding: 30px 15px 15px;
+    margin-top: auto; /* مهم: يدفع الفوتر للأسفل */
+    width: 100%;
     position: relative;
     bottom: 0;
-    width: 100%;
+    flex-shrink: 0; /* يمنع الفوتر من التقلص */
 }
 
 .footer-content {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
     max-width: 1200px;
-    margin: 0 auto 30px;
+    margin: 0 auto 20px;
 }
 
 .footer-section h3 {
@@ -792,6 +397,12 @@ input, select, textarea {
     gap: 10px;
     margin-bottom: 8px;
     font-size: 14px;
+}
+
+.footer-section p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 15px;
 }
 
 .social-icons {
@@ -820,12 +431,13 @@ input, select, textarea {
 
 .copyright {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 15px;
     border-top: 1px solid rgba(255,255,255,0.1);
     color: rgba(255,255,255,0.7);
-    font-size: 13px;
+    font-size: 12px;
     max-width: 1200px;
     margin: 0 auto;
+    line-height: 1.4;
 }
 
 /* ===== تأثيرات إضافية ===== */
@@ -839,267 +451,37 @@ input, select, textarea {
     100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 
-/* ===== تحسين ظهور القوائم المنسدلة ===== */
-select {
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23556859' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: left 12px center;
-    background-size: 12px;
-    padding-left: 35px;
-}
-
-/* ===== تنسيق حقول الميزانية ===== */
-.budget-currency-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.budget-currency-container input {
-    flex: 1;
-}
-
-.budget-currency-container select {
-    width: 100%;
-}
-
-/* ===== رسالة الخطأ ===== */
-.error-message {
-    color: #e74c3c;
-    font-size: 12px;
-    margin-top: 5px;
-    display: none;
-    padding: 6px;
-    background-color: #fee;
-    border-radius: 5px;
-    border: 1px solid #fcc;
-}
-
-/* ===== التجاوب للشاشات المتوسطة ===== */
-@media (min-width: 768px) {
-    .header {
-        padding: 15px 5%;
-    }
-    
-    .logo {
-        height: 70px;
-    }
-    
-    .company-name-ar {
-        font-size: 32px;
-    }
-    
-    .company-name-en {
-        font-size: 18px;
-    }
-    
-    .company-tagline {
-        font-size: 15px;
-    }
-    
-    .whatsapp-btn {
-        padding: 12px 25px;
-        font-size: 16px;
-    }
-    
-    .phone-number {
-        font-size: 18px;
-        padding: 8px 15px;
-    }
-    
-    .phone-number a {
-        font-size: 18px;
-    }
-    
-    .flag-icon {
-        width: 24px;
-        height: 16px;
+/* ===== إصلاحات خاصة للجوال ===== */
+@media (max-width: 768px) {
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
     
     main {
-        padding-top: 130px;
+        padding-top: 180px !important; /* مساحة أكبر للهيدر على الجوال */
+        flex: 1;
+        width: 100%;
     }
     
-    .banner {
-        height: 450px;
-    }
-    
-    .banner h1 {
-        font-size: 38px;
-    }
-    
-    .banner p {
-        font-size: 20px;
-    }
-    
-    .banner-content {
-        padding: 35px;
-        max-width: 800px;
-    }
-    
-    .container {
-        padding: 40px 20px;
-    }
-    
-    .section-title {
-        font-size: 28px;
-        margin-bottom: 40px;
-    }
-    
-    .services {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
-        margin: 40px 0;
-    }
-    
-    .service-card {
-        padding: 30px 25px;
-        min-height: 320px;
-    }
-    
-    .service-icon {
-        font-size: 50px;
-        height: 90px;
-        width: 90px;
-        line-height: 90px;
-    }
-    
-    .service-card h3 {
-        font-size: 24px;
-    }
-    
-    .service-description {
-        font-size: 17px;
-    }
-    
-    .service-link {
-        padding: 12px 25px;
-        font-size: 17px;
-    }
-    
-    .page-header {
-        padding: 50px 5% 40px;
-    }
-    
-    .page-title {
-        font-size: 36px;
-    }
-    
-    .page-subtitle {
-        font-size: 18px;
-    }
-    
-    .back-btn {
-        padding: 12px 30px;
-    }
-    
-    .driver-service-section {
-        padding: 40px 35px;
-    }
-    
-    .booking-section {
-        padding: 40px 35px;
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr 1fr;
-        gap: 25px;
-    }
-    
-    .budget-currency-container {
-        flex-direction: row;
-    }
-    
-    .budget-currency-container select {
-        width: 150px;
-    }
-    
-    .footer {
-        padding: 50px 5% 30px;
-    }
-    
-    .footer-content {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 40px;
-    }
-    
-    .footer-section h3 {
-        font-size: 20px;
-    }
-    
-    .footer-contact-item {
-        font-size: 16px;
-    }
-}
-
-/* ===== التجاوب للشاشات الكبيرة ===== */
-@media (min-width: 992px) {
     .header {
-        flex-direction: row;
-        text-align: left;
-        gap: 0;
-    }
-    
-    .contact-header {
-        text-align: right;
-    }
-    
-    .phone-numbers-container {
-        align-items: flex-end;
-    }
-    
-    .services {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        margin: 50px 0;
-    }
-    
-    .service-card {
-        min-height: 350px;
-    }
-    
-    .container {
-        padding: 50px 20px;
-    }
-    
-    .section-title {
-        font-size: 32px;
-    }
-    
-    .banner {
-        height: 500px;
-    }
-    
-    .banner h1 {
-        font-size: 46px;
-    }
-    
-    .banner p {
-        font-size: 22px;
-    }
-    
-    .banner-content {
-        max-width: 850px;
-    }
-}
-
-/* ===== إصلاحات خاصة للجوال ===== */
-@media (max-width: 767px) {
-    .header {
-        padding: 10px 4%;
+        padding: 8px 4%;
         flex-direction: column;
         text-align: center;
-        gap: 15px;
+        gap: 12px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
     }
     
     .logo-container {
         flex-direction: column;
         text-align: center;
-        gap: 10px;
+        gap: 8px;
     }
     
     .company-info {
@@ -1115,58 +497,60 @@ select {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 8px;
+        gap: 6px;
+        margin-top: 5px;
     }
     
     .phone-number {
-        font-size: 14px;
-        padding: 6px 10px;
-        flex: 1;
-        min-width: 160px;
+        font-size: 12px;
+        padding: 5px 8px;
+        min-width: 140px;
         justify-content: center;
     }
     
     .phone-number a {
-        font-size: 14px;
-    }
-    
-    main {
-        padding-top: 180px; /* مساحة أكبر للهيدر على الجوال */
-        min-height: calc(100vh - 250px);
+        font-size: 12px;
     }
     
     .banner {
-        height: 320px;
+        height: 280px;
         margin-top: 0;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
     
     .banner-content {
         padding: 20px;
+        max-width: 95%;
     }
     
     .banner h1 {
-        font-size: 24px;
-        margin-bottom: 12px;
+        font-size: 22px;
+        margin-bottom: 10px;
     }
     
     .banner p {
         font-size: 14px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
+        line-height: 1.4;
     }
     
     .container {
-        padding: 20px 15px;
+        padding: 15px;
     }
     
     .section-title {
-        font-size: 22px;
-        margin-bottom: 25px;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .services {
+        gap: 15px;
+        margin: 20px 0;
     }
     
     .service-card {
         padding: 20px 15px;
-        min-height: 260px;
+        min-height: 240px;
     }
     
     .service-icon {
@@ -1178,140 +562,92 @@ select {
     }
     
     .service-card h3 {
-        font-size: 20px;
-        margin-bottom: 12px;
+        font-size: 19px;
+        margin-bottom: 10px;
     }
     
     .service-description {
-        font-size: 15px;
+        font-size: 14px;
         margin-bottom: 15px;
+        line-height: 1.4;
     }
     
     .service-link {
-        padding: 8px 18px;
-        font-size: 15px;
-    }
-    
-    .form-group {
-        margin-bottom: 15px;
-    }
-    
-    input, select, textarea {
-        padding: 12px 14px;
-        font-size: 16px; /* مهم لمنع التكبير في iOS */
-    }
-    
-    .submit-btn {
-        padding: 14px 25px;
-        font-size: 16px;
-    }
-    
-    .footer {
-        padding: 30px 15px 15px;
-        margin-top: 30px;
-    }
-    
-    .footer-section {
-        margin-bottom: 20px;
-    }
-    
-    .footer-section h3 {
-        font-size: 18px;
-    }
-    
-    .footer-contact-item {
+        padding: 8px 16px;
         font-size: 14px;
     }
     
+    /* إصلاح الفوتر على الجوال */
+    .footer {
+        padding: 25px 15px 10px;
+        margin-top: auto;
+        width: 100%;
+        position: relative;
+        bottom: 0;
+    }
+    
+    .footer-content {
+        gap: 20px;
+    }
+    
+    .footer-section {
+        margin-bottom: 15px;
+    }
+    
+    .footer-section h3 {
+        font-size: 16px;
+    }
+    
+    .footer-section p {
+        font-size: 13px;
+    }
+    
+    .footer-contact-item {
+        font-size: 13px;
+    }
+    
     .copyright {
-        font-size: 12px;
+        font-size: 11px;
         padding-top: 15px;
     }
 }
 
-/* إصلاح مشكلة الهيدر في iOS */
-@supports (-webkit-touch-callout: none) {
-    .header {
-        position: -webkit-sticky;
-        position: sticky;
+/* إصلاح للشاشات المتوسطة */
+@media (min-width: 769px) and (max-width: 1024px) {
+    main {
+        padding-top: 130px;
     }
     
-    body {
-        height: -webkit-fill-available;
+    .banner {
+        height: 350px;
+    }
+    
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* تحسين تجربة اللمس على الموبايل */
-@media (hover: none) and (pointer: coarse) {
-    .service-card,
-    .return-option,
-    .checkbox-item,
-    .phone-number {
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
+/* إصلاح للشاشات الكبيرة */
+@media (min-width: 1025px) {
+    main {
+        padding-top: 120px;
     }
     
-    input, select, textarea {
-        font-size: 16px;
-        min-height: 44px;
+    .banner {
+        height: 450px;
     }
     
-    .submit-btn,
-    .whatsapp-btn,
-    .back-btn,
-    .service-link {
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-/* منع التكبير التلقائي في حقول الإدخال على iOS */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    select,
-    textarea,
-    input {
-        font-size: 16px;
-    }
-}
-
-/* تحسينات إضافية للشاشات الصغيرة جداً */
-@media (max-width: 360px) {
-    .phone-number {
-        min-width: 140px;
-        font-size: 13px;
+    .services {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
     }
     
-    .phone-number a {
-        font-size: 13px;
-    }
-    
-    .banner h1 {
-        font-size: 22px;
-    }
-    
-    .banner p {
-        font-size: 13px;
-    }
-    
-    .service-card {
-        min-height: 240px;
-        padding: 15px 12px;
-    }
-    
-    .service-icon {
-        font-size: 35px;
-        height: 60px;
-        width: 60px;
-        line-height: 60px;
-    }
-    
-    .service-card h3 {
-        font-size: 18px;
-    }
-    
-    .service-description {
-        font-size: 14px;
+    .footer-content {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
