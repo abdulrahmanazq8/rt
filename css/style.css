@@ -17,6 +17,10 @@
     padding: 0; 
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     line-height: 1.7;
     color: var(--black);
@@ -25,7 +29,10 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Cairo', sans-serif;
-    padding-top: 0; /* تمت إزالته للتحكم بـ JS */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
 }
 
 .english-font {
@@ -52,6 +59,14 @@ body {
 
 .header.hidden {
     transform: translateY(-100%);
+}
+
+/* عنصر main للحاوية الرئيسية */
+main {
+    padding-top: 120px; /* مساحة للهيدر الثابت */
+    min-height: 100vh;
+    display: block;
+    flex: 1;
 }
 
 .logo-container {
@@ -180,7 +195,10 @@ body {
     color: white;
     padding: 0 20px;
     position: relative;
-    transition: transform 0.3s ease-in-out, margin-top 0.3s ease-in-out;
+    z-index: 1;
+    margin-top: 0;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease-in-out;
 }
 
 .banner.hidden {
@@ -229,7 +247,6 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 60px 20px;
-    flex: 1;
 }
 
 .section-title {
@@ -344,7 +361,7 @@ body {
 .page-header {
     background: linear-gradient(135deg, var(--olive-dark), var(--sage-green));
     color: white;
-    padding: 100px 5% 60px;
+    padding: 120px 5% 60px;
     text-align: center;
     border-radius: 0 0 30px 30px;
     margin-bottom: 50px;
@@ -978,5 +995,102 @@ select {
     
     .page-header {
         padding: 120px 5% 30px;
+    }
+}
+
+/* ===== إصلاحات إضافية للجوال ===== */
+@media (max-width: 768px) {
+    main {
+        padding-top: 150px; /* مساحة أكبر للهيدر على الجوال */
+    }
+    
+    .banner {
+        margin-top: 0;
+    }
+    
+    .header {
+        padding: 10px 15px;
+    }
+    
+    .logo-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .company-info {
+        text-align: center;
+    }
+    
+    .contact-header {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .phone-numbers-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .phone-number {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+    
+    /* إصلاح مشكلة الزوم في حقول الإدخال على iOS */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+    
+    .date-time-input input {
+        font-size: 16px !important;
+    }
+    
+    /* منع التكبير التلقائي في حقول الإدخال */
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+        select,
+        textarea,
+        input {
+            font-size: 16px;
+        }
+    }
+}
+
+/* إصلاح مشكلة الهيدر في iOS */
+@supports (-webkit-touch-callout: none) {
+    .header {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+    
+    body {
+        height: -webkit-fill-available;
+    }
+}
+
+/* تحسين تجربة اللمس على الموبايل */
+@media (hover: none) and (pointer: coarse) {
+    .service-card,
+    .return-option,
+    .checkbox-item,
+    .phone-number {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    input, select, textarea {
+        font-size: 16px;
+        min-height: 44px;
+    }
+    
+    .submit-btn,
+    .whatsapp-btn,
+    .back-btn,
+    .service-link {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
