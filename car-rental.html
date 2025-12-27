@@ -9,6 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* إضافات خاصة بصفحة تأجير السيارات */
+        .child-age-group {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+    </style>
 </head>
 <body>
     <!-- الهيدر والشعار -->
@@ -255,6 +266,7 @@
                         </ol>
                     </div>
                     
+                    <!-- زر الإرسال في النهاية -->
                     <div class="submit-btn-container">
                         <button type="submit" class="submit-btn">
                             <i class="fab fa-whatsapp whatsapp-icon"></i> إرسال طلب تأجير السيارة
@@ -311,7 +323,7 @@
     </footer>
 
     <script>
-        // فتح واتساب
+        // ===== دالة فتح واتساب =====
         function openWhatsApp(phoneNumber) {
             const message = "مرحباً، أريد الاستفسار عن خدمات راوند تريب";
             const encodedMessage = encodeURIComponent(message);
@@ -324,7 +336,12 @@
             }
         }
         
+        // ===== تهيئة الصفحة عند التحميل =====
         document.addEventListener('DOMContentLoaded', function() {
+            // إضافة padding-top للـ body يعتمد على ارتفاع الهيدر
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            document.body.style.paddingTop = headerHeight + 'px';
+            
             // تعبئة خيارات العمر (19-65)
             const driverAgeSelect = document.getElementById('driverAge');
             if (driverAgeSelect) {
@@ -418,54 +435,180 @@
                 });
             }
             
-            // معالجة إرسال النموذج
-            const carRentalForm = document.getElementById('carRentalForm');
-            if (carRentalForm) {
-                carRentalForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // التحقق من التواريخ وحد الركاب
-                    if (!validateCarRentalDates() || !checkPassengerLimit()) {
-                        return;
-                    }
-                    
-                    const formData = new FormData(carRentalForm);
-                    const data = {};
-                    const paymentMethods = [];
-                    const childAges = [];
-                    
-                    // جمع بيانات أعمار الأطفال
-                    const childrenCount = parseInt(formData.get('childrenCount') || 0);
-                    for (let i = 1; i <= childrenCount; i++) {
-                        const age = formData.get(`childAge${i}`);
-                        if (age) childAges.push(age + ' سنوات');
-                    }
-                    
-                    formData.forEach((value, key) => {
-                        if (key.startsWith('childAge')) return;
-                        if (key === 'paymentMethod') {
-                            paymentMethods.push(value);
-                        } else {
-                            data[key] = value;
-                        }
-                    });
-                    
-                    // بناء الرسالة
-                    const paymentMethodsStr = paymentMethods.length > 0 ? paymentMethods.join('، ') : 'غير محدد';
-                    const childrenInfo = childrenCount > 0 ? `${childrenCount} طفل، أعمارهم: ${childAges.join('، ')}` : 'لا يوجد أطفال';
-                    const returnLocation = data.returnOption === 'same' ? 'نفس مكان الاستلام' : data.returnLocation;
-                    
-                    const now = new Date();
-                    const formattedDate = now.toLocaleDateString('en-GB', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: true
-                    }).replace(',', '');
-                    
-                    const message = `*طلب تأجير سيارة - راوند تريب*
+            // تحديد خيار مكان التسليم الافتراضي
+            selectReturnOption('same');
+        });
+        
+        // ===== إخفاء الهيدر عند التمرير =====
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // التمرير لأسفل - إخفاء
+                if (header) header.classList.add('hidden');
+            } else {
+                // التمرير لأعلى - إظهار
+                if (header) header.classList.remove('hidden');
+            }
+            lastScrollTop = scrollTop;
+        });
+        
+        // ===== خيارات مكان التسليم =====
+        function selectReturnOption(option) {
+            const options = document.querySelectorAll('.return-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            if (option === 'same') {
+                options[0].classList.add('selected');
+                document.getElementById('returnOption').value = 'same';
+                document.getElementById('returnLocationContainer').style.display = 'none';
+                const pickupLocation = document.getElementById('pickupLocation').value;
+                document.getElementById('returnLocation').value = pickupLocation || 'نفس مكان الاستلام';
+            } else {
+                options[1].classList.add('selected');
+                document.getElementById('returnOption').value = 'different';
+                document.getElementById('returnLocationContainer').style.display = 'block';
+                document.getElementById('returnLocation').value = '';
+                if (document.getElementById('returnLocation')) {
+                    document.getElementById('returnLocation').focus();
+                }
+            }
+        }
+        
+        // ===== تحديث مكان التسليم عند تغيير مكان الاستلام =====
+        document.getElementById('pickupLocation').addEventListener('input', function() {
+            if (document.getElementById('returnOption').value === 'same') {
+                document.getElementById('returnLocation').value = this.value;
+            }
+        });
+        
+        // ===== تفعيل خيارات أعمار الأطفال =====
+        function toggleChildAges(count) {
+            const childAgeGroup = document.getElementById('childAgeGroup');
+            const childAgeInputs = document.getElementById('childAgeInputs');
+            
+            if (count > 0) {
+                childAgeGroup.style.display = 'block';
+                childAgeInputs.innerHTML = '';
+                
+                for (let i = 1; i <= count; i++) {
+                    const ageSelect = document.createElement('div');
+                    ageSelect.className = 'form-group';
+                    ageSelect.innerHTML = `
+                        <label for="childAge${i}">عمر الطفل ${i}</label>
+                        <select id="childAge${i}" name="childAge${i}">
+                            <option value="">اختر العمر</option>
+                            <option value="1">1 سنة</option>
+                            <option value="2">2 سنوات</option>
+                            <option value="3">3 سنوات</option>
+                            <option value="4">4 سنوات</option>
+                            <option value="5">5 سنوات</option>
+                            <option value="6">6 سنوات</option>
+                            <option value="7">7 سنوات</option>
+                            <option value="8">8 سنوات</option>
+                            <option value="9">9 سنوات</option>
+                            <option value="10">10 سنوات</option>
+                        </select>
+                    `;
+                    childAgeInputs.appendChild(ageSelect);
+                }
+            } else {
+                childAgeGroup.style.display = 'none';
+                childAgeInputs.innerHTML = '';
+            }
+        }
+        
+        // ===== التحقق من حد الركاب =====
+        function checkPassengerLimit() {
+            const totalAdults = parseInt(document.getElementById('totalAdults').value) || 0;
+            const childrenCount = parseInt(document.getElementById('childrenCount').value) || 0;
+            const totalPassengers = totalAdults + childrenCount;
+            const errorElement = document.getElementById('passengerLimitError');
+            
+            if (errorElement) {
+                if (totalPassengers > 9) {
+                    errorElement.style.display = 'block';
+                    errorElement.textContent = `❌ الخطأ: عدد الركاب ${totalPassengers} يتجاوز الحد الأقصى (9 ركاب). إذا كنت بحاجة إلى أكثر من 9 ركاب، يرجى الاتصال بنا مباشرة لتأجير سيارتين.`;
+                    return false;
+                } else {
+                    errorElement.style.display = 'none';
+                    return true;
+                }
+            }
+            return true;
+        }
+        
+        // ===== التحقق من التواريخ قبل الإرسال =====
+        function validateCarRentalDates() {
+            const pickupDate = document.getElementById('pickupDate');
+            const pickupTime = document.getElementById('pickupTime');
+            const returnDate = document.getElementById('returnDate');
+            const returnTime = document.getElementById('returnTime');
+            
+            if (!pickupDate || !returnDate) return true;
+            
+            const pickupDateTime = new Date(pickupDate.value + ' ' + (pickupTime?.value || '00:00'));
+            const returnDateTime = new Date(returnDate.value + ' ' + (returnTime?.value || '00:00'));
+            
+            if (returnDateTime < pickupDateTime) {
+                alert('❌ خطأ: تاريخ/وقت التسليم يجب أن يكون بعد تاريخ/وقت الاستلام');
+                returnDate.focus();
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // ===== معالجة إرسال النموذج =====
+        document.getElementById('carRentalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // التحقق من التواريخ وحد الركاب
+            if (!validateCarRentalDates() || !checkPassengerLimit()) {
+                return;
+            }
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const data = {};
+            const paymentMethods = [];
+            const childAges = [];
+            
+            // جمع بيانات أعمار الأطفال
+            const childrenCount = parseInt(formData.get('childrenCount') || 0);
+            for (let i = 1; i <= childrenCount; i++) {
+                const age = formData.get(`childAge${i}`);
+                if (age) childAges.push(age + ' سنوات');
+            }
+            
+            formData.forEach((value, key) => {
+                if (key.startsWith('childAge')) return;
+                if (key === 'paymentMethod') {
+                    paymentMethods.push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+            
+            // بناء الرسالة
+            const paymentMethodsStr = paymentMethods.length > 0 ? paymentMethods.join('، ') : 'غير محدد';
+            const childrenInfo = childrenCount > 0 ? `${childrenCount} طفل، أعمارهم: ${childAges.join('، ')}` : 'لا يوجد أطفال';
+            const returnLocation = data.returnOption === 'same' ? 'نفس مكان الاستلام' : data.returnLocation;
+            
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            }).replace(',', '');
+            
+            const message = `*طلب تأجير سيارة - راوند تريب*
 
 *المعلومات الشخصية:*
 • الاسم: ${data.carName || 'غير محدد'}
@@ -499,118 +642,12 @@ ${data.carNotes || 'لا توجد ملاحظات'}
 *رقم التواصل:* ${data.carPhone || 'غير محدد'}
 
 --- راوند تريب - خدمة تأجير السيارات ---`;
-                    
-                    sendWhatsAppMessage(message);
-                    setTimeout(() => carRentalForm.reset(), 2000);
-                });
-            }
+            
+            sendWhatsAppMessage(message);
+            setTimeout(() => form.reset(), 2000);
         });
         
-        // خيارات مكان التسليم
-        function selectReturnOption(option) {
-            const options = document.querySelectorAll('.return-option');
-            options.forEach(opt => opt.classList.remove('selected'));
-            
-            if (option === 'same') {
-                options[0].classList.add('selected');
-                document.getElementById('returnOption').value = 'same';
-                document.getElementById('returnLocationContainer').style.display = 'none';
-                const pickupLocation = document.getElementById('pickupLocation').value;
-                document.getElementById('returnLocation').value = pickupLocation || 'نفس مكان الاستلام';
-            } else {
-                options[1].classList.add('selected');
-                document.getElementById('returnOption').value = 'different';
-                document.getElementById('returnLocationContainer').style.display = 'block';
-                document.getElementById('returnLocation').value = '';
-                document.getElementById('returnLocation').focus();
-            }
-        }
-        
-        // تحديث مكان التسليم عند تغيير مكان الاستلام
-        document.getElementById('pickupLocation').addEventListener('input', function() {
-            if (document.getElementById('returnOption').value === 'same') {
-                document.getElementById('returnLocation').value = this.value;
-            }
-        });
-        
-        // تفعيل خيارات أعمار الأطفال
-        function toggleChildAges(count) {
-            const childAgeGroup = document.getElementById('childAgeGroup');
-            const childAgeInputs = document.getElementById('childAgeInputs');
-            
-            if (count > 0) {
-                childAgeGroup.style.display = 'block';
-                childAgeInputs.innerHTML = '';
-                
-                for (let i = 1; i <= count; i++) {
-                    const ageSelect = document.createElement('div');
-                    ageSelect.className = 'form-group';
-                    ageSelect.innerHTML = `
-                        <label for="childAge${i}">عمر الطفل ${i}</label>
-                        <select id="childAge${i}" name="childAge${i}" required>
-                            <option value="">اختر العمر</option>
-                            <option value="1">1 سنة</option>
-                            <option value="2">2 سنوات</option>
-                            <option value="3">3 سنوات</option>
-                            <option value="4">4 سنوات</option>
-                            <option value="5">5 سنوات</option>
-                            <option value="6">6 سنوات</option>
-                            <option value="7">7 سنوات</option>
-                            <option value="8">8 سنوات</option>
-                            <option value="9">9 سنوات</option>
-                            <option value="10">10 سنوات</option>
-                        </select>
-                    `;
-                    childAgeInputs.appendChild(ageSelect);
-                }
-            } else {
-                childAgeGroup.style.display = 'none';
-                childAgeInputs.innerHTML = '';
-            }
-        }
-        
-        // التحقق من حد الركاب
-        function checkPassengerLimit() {
-            const totalAdults = parseInt(document.getElementById('totalAdults').value) || 0;
-            const childrenCount = parseInt(document.getElementById('childrenCount').value) || 0;
-            const totalPassengers = totalAdults + childrenCount;
-            const errorElement = document.getElementById('passengerLimitError');
-            
-            if (errorElement) {
-                if (totalPassengers > 9) {
-                    errorElement.style.display = 'block';
-                    errorElement.textContent = `❌ الخطأ: عدد الركاب ${totalPassengers} يتجاوز الحد الأقصى (9 ركاب). إذا كنت بحاجة إلى أكثر من 9 ركاب، يرجى الاتصال بنا مباشرة لتأجير سيارتين.`;
-                    return false;
-                } else {
-                    errorElement.style.display = 'none';
-                    return true;
-                }
-            }
-            return true;
-        }
-        
-        // التحقق من التواريخ قبل الإرسال
-        function validateCarRentalDates() {
-            const pickupDate = document.getElementById('pickupDate');
-            const pickupTime = document.getElementById('pickupTime');
-            const returnDate = document.getElementById('returnDate');
-            const returnTime = document.getElementById('returnTime');
-            
-            if (!pickupDate || !returnDate) return true;
-            
-            const pickupDateTime = new Date(pickupDate.value + ' ' + (pickupTime?.value || '00:00'));
-            const returnDateTime = new Date(returnDate.value + ' ' + (returnTime?.value || '00:00'));
-            
-            if (returnDateTime < pickupDateTime) {
-                alert('❌ خطأ: تاريخ/وقت التسليم يجب أن يكون بعد تاريخ/وقت الاستلام');
-                returnDate.focus();
-                return false;
-            }
-            
-            return true;
-        }
-        
-        // دالة عامة لإرسال الرسائل عبر واتساب
+        // ===== دالة عامة لإرسال الرسائل عبر واتساب =====
         function sendWhatsAppMessage(message) {
             const encodedMessage = encodeURIComponent(message);
             const companyWhatsappNumber = "96565750302";
