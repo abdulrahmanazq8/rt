@@ -101,14 +101,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // تحميل صورة البانر
+    // تحميل صورة البانر في حالة عدم وجودها
     const banner = document.querySelector('.banner');
     if (banner) {
         const img = new Image();
-        img.src = 'banner.jpg';
+        img.src = 'images/banner.jpg';
         img.onerror = function() {
             banner.style.backgroundImage = `linear-gradient(rgba(85, 104, 89, 0.85), rgba(175, 181, 152, 0.8)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')`;
         };
+    }
+    
+    // إضافة مسافة للهيدر لمنع التداخل
+    const headerHeight = document.querySelector('.header').offsetHeight;
+    const mainElement = document.querySelector('main');
+    if (mainElement) {
+        mainElement.style.paddingTop = headerHeight + 'px';
     }
 });
 
@@ -767,3 +774,31 @@ function sendWhatsAppMessage(message) {
         alert('✅ تم تجهيز طلبك بنجاح!\n\nسيتم الآن فتح تطبيق واتساب. تأكد من ظهور جميع بياناتك في الرسالة ثم انقر على زر الإرسال.\n\nشكراً لاختيارك راوند تريب!');
     }, 500);
 }
+
+// ===== إخفاء الهيدر والبانر عند التمرير =====
+let lastScrollTop = 0;
+const header = document.querySelector('.header');
+const banner = document.querySelector('.banner');
+
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // إخفاء عند التمرير لأسفل، إظهار عند التمرير لأعلى
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // التمرير لأسفل - إخفاء الهيدر والبانر
+        if (header) header.classList.add('hidden');
+        if (banner) banner.classList.add('hidden');
+    } else {
+        // التمرير لأعلى - إظهار الهيدر والبانر
+        if (header) header.classList.remove('hidden');
+        if (banner) banner.classList.remove('hidden');
+    }
+    
+    // إظهار الهيدر عند الوصول لأعلى الصفحة
+    if (scrollTop <= 100) {
+        if (header) header.classList.remove('hidden');
+        if (banner) banner.classList.remove('hidden');
+    }
+    
+    lastScrollTop = scrollTop;
+});
