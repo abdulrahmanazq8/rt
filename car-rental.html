@@ -8,14 +8,684 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --olive-dark: #556859;
+            --sage-green: #AFB598;
+            --light-beige: #D0CEBB;
+            --black: #000000;
+            --white: #FFFFFF;
+            --primary: #556859;
+            --secondary: #AFB598;
+            --accent: #D0CEBB;
+            --dark: #000000;
+            --light: #f5f5f5;
+        }
+        
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        body {
+            line-height: 1.7;
+            color: var(--black);
+            background-color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Cairo', sans-serif;
+            padding-top: 120px;
+        }
+        
+        .english-font {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* الهيدر والشعار - مثبت في الأعلى */
+        .header {
+            background: linear-gradient(135deg, var(--olive-dark) 0%, var(--sage-green) 100%);
+            padding: 15px 5%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+        }
+        
+        .logo {
+            height: 70px;
+            width: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            object-fit: contain;
+            background-color: var(--light-beige);
+            padding: 5px;
+        }
+        
+        .company-info {
+            color: white;
+        }
+        
+        .company-name-ar {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .company-name-en {
+            font-size: 18px;
+            color: var(--light-beige);
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        
+        .company-tagline {
+            color: rgba(255,255,255,0.9);
+            font-size: 15px;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .contact-header {
+            text-align: left;
+            color: white;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .phone-numbers-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .phone-number {
+            font-size: 20px;
+            color: white;
+            direction: ltr;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .phone-number:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .phone-number a {
+            color: white;
+            text-decoration: none;
+            direction: ltr;
+            display: inline-block;
+            flex: 1;
+            font-size: 20px;
+        }
+        
+        .flag-icon {
+            width: 24px;
+            height: 16px;
+            border-radius: 3px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* رأس الصفحة الداخلية */
+        .page-header {
+            background: linear-gradient(135deg, var(--olive-dark), var(--sage-green));
+            color: white;
+            padding: 80px 5% 60px;
+            text-align: center;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 50px;
+            margin-top: -20px;
+        }
+        
+        .page-title {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+        
+        .page-subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-size: 18px;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            background: white;
+            color: var(--olive-dark);
+        }
+        
+        .page-content {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: var(--olive-dark);
+            margin-bottom: 50px;
+            font-size: 36px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(to right, var(--sage-green), var(--light-beige));
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* نموذج الحجز */
+        .booking-section {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 50px;
+            margin: 80px auto;
+            max-width: 850px;
+            box-shadow: 0 15px 40px rgba(85, 104, 89, 0.1);
+            border: 2px solid var(--light-beige);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .booking-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to left, var(--sage-green), var(--olive-dark));
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--olive-dark);
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        .required:after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--light-beige);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #f8fafc;
+            font-family: 'Cairo', sans-serif;
+            text-align: right;
+            cursor: pointer;
+        }
+        
+        /* حقول التاريخ والوقت */
+        .date-time-input {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .date-time-input input {
+            cursor: pointer;
+            background-color: white;
+        }
+        
+        .date-time-input:after {
+            content: '\f073';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--olive-dark);
+            pointer-events: none;
+            font-size: 18px;
+        }
+        
+        .time-input:after {
+            content: '\f017';
+        }
+        
+        .submit-btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--sage-green), var(--olive-dark));
+            color: white;
+            border: none;
+            padding: 20px 45px;
+            font-size: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            letter-spacing: 1px;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, var(--olive-dark), var(--sage-green));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(85, 104, 89, 0.3);
+        }
+        
+        .whatsapp-icon {
+            font-size: 24px;
+        }
+        
+        /* التوجيهات داخل النماذج */
+        .form-instructions {
+            background: var(--light-beige);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            border-right: 5px solid var(--sage-green);
+        }
+        
+        .form-instructions h4 {
+            color: var(--olive-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-instructions ol {
+            padding-right: 20px;
+            line-height: 2;
+        }
+        
+        /* خيارات متعددة */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+        }
+        
+        /* الشروط العامة */
+        .terms-section {
+            background: var(--light-beige);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            border-right: 5px solid var(--sage-green);
+        }
+        
+        .terms-section h3 {
+            color: var(--olive-dark);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .terms-list {
+            list-style: none;
+            padding-right: 0;
+        }
+        
+        .terms-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(85, 104, 89, 0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+        
+        .terms-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .terms-list i {
+            color: var(--olive-dark);
+            margin-top: 5px;
+        }
+        
+        /* خيارات أعمار الأطفال المخفية */
+        .child-age-group {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+        
+        /* خيارات مكان التسليم */
+        .return-options {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .return-option {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border: 2px solid var(--light-beige);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .return-option:hover {
+            border-color: var(--sage-green);
+        }
+        
+        .return-option.selected {
+            border-color: var(--olive-dark);
+            background-color: rgba(85, 104, 89, 0.05);
+        }
+        
+        /* الفوتر */
+        .footer {
+            background: linear-gradient(135deg, var(--olive-dark) 0%, #445a4a 100%);
+            color: white;
+            padding: 70px 5% 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto 50px;
+        }
+        
+        .footer-section h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            color: var(--light-beige);
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--light-beige);
+            color: var(--olive-dark);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+            font-size: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* رسالة الخطأ */
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+            padding: 8px;
+            background-color: #fee;
+            border-radius: 5px;
+            border: 1px solid #fcc;
+        }
+        
+        /* تحسين ظهور القوائم المنسدلة */
+        select {
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23556859' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 15px center;
+            background-size: 12px;
+            padding-left: 40px;
+        }
+        
+        /* تأثيرات إضافية */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        /* التجاوب */
+        @media (max-width: 992px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                position: fixed;
+            }
+            
+            .contact-header {
+                text-align: center;
+            }
+            
+            .booking-section {
+                padding: 30px 20px;
+                margin: 40px 15px;
+            }
+            
+            .page-title {
+                font-size: 32px;
+            }
+            
+            body {
+                padding-top: 150px;
+            }
+            
+            .phone-numbers-container {
+                align-items: center;
+            }
+            
+            .phone-number {
+                font-size: 16px;
+                padding: 8px 12px;
+            }
+            
+            .phone-number a {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            body {
+                padding-top: 160px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .form-group {
+                margin-bottom: 20px;
+            }
+            
+            .header {
+                padding: 10px 5%;
+            }
+            
+            .logo {
+                height: 50px;
+            }
+            
+            .company-name-ar {
+                font-size: 24px;
+            }
+            
+            .company-name-en {
+                font-size: 14px;
+            }
+            
+            .company-tagline {
+                font-size: 12px;
+            }
+            
+            .page-header {
+                padding: 60px 5% 40px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- الهيدر والشعار -->
     <header class="header">
         <div class="logo-container">
-            <a href="index.html">
-                <img src="logo.png" alt="شعار راوند تريب" class="logo" onerror="this.style.display='none'">
+            <a href="index.html" style="display: flex; align-items: center; gap: 20px; text-decoration: none;">
+                <img src="logo.png" alt="شعار راوند تريب" class="logo">
             </a>
             
             <div class="company-info">
@@ -227,38 +897,40 @@
                     <!-- رسالة خطأ الحد الأقصى للركاب -->
                     <div id="passengerLimitError" class="error-message" style="display: none;"></div>
                     
-                    <button type="submit" class="submit-btn">
-                        <i class="fab fa-whatsapp whatsapp-icon"></i> إرسال طلب تأجير السيارة
-                    </button>
+                    <!-- الشروط العامة لتأجير السيارات -->
+                    <div class="terms-section">
+                        <h3><i class="fas fa-file-contract"></i> الشروط العامة لتأجير السيارات</h3>
+                        <ul class="terms-list">
+                            <li><i class="fas fa-check-circle"></i> <strong>الحد الأدنى للعمر:</strong> يجب أن يكون عمر السائق 19 سنة أو أكثر قد يتطلب عمر أكبر لبعض المدن والسيارات</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>المستندات المطلوبة:</strong> الرخصة المحلية - الرخصة الدولية - جواز السفر</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>التأمين:</strong> يشمل السعر تأميناً شاملاً ضد الحوادث والسرقة</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>الوديعة:</strong> قد يتم طلب وديعــة مستردة عند استلام السيارة</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>الوقود:</strong> يتم تسليم السيارة بوقود كامل ويجب إرجاعها بنفس الحالة</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>المسافة المقطوعة:</strong> جميع السيارات عداد مفتوح</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>الممنوعات:</strong> يحظر التدخين أو قيادة السيارة تحت تأثير أي مواد مخدرة</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>التسليم والاستلام:</strong> متوفر في المطار أو العنوان المطلوب</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>الأطفال:</strong> يجب ابلاغنا بوجود الأطفال تحت 10 سنوات لضرورة توفير الكرسي</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>النظافة:</strong> يجب اعادة السيارة بحالة نظيفة</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="form-instructions">
+                        <h4><i class="fas fa-info-circle"></i> كيفية إكمال الحجز:</h4>
+                        <ol>
+                            <li>املأ جميع البيانات المطلوبة في النموذج أعلاه</li>
+                            <li>اضغط على زر "إرسال طلب تأجير السيارة"</li>
+                            <li>سيتم فتح تطبيق واتساب على جهازك تلقائياً</li>
+                            <li>ستجد الرسالة جاهزة مع كل بياناتك، فقط اضغط "إرسال"</li>
+                            <li>سنتصل بك خلال 24 ساعة لتأكيد الحجز وتفاصيل الدفع</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="submit-btn-container">
+                        <button type="submit" class="submit-btn">
+                            <i class="fab fa-whatsapp whatsapp-icon"></i> إرسال طلب تأجير السيارة
+                        </button>
+                    </div>
                 </form>
-                
-                <!-- الشروط العامة لتأجير السيارات -->
-                <div class="terms-section">
-                    <h3><i class="fas fa-file-contract"></i> الشروط العامة لتأجير السيارات</h3>
-                    <ul class="terms-list">
-                        <li><i class="fas fa-check-circle"></i> <strong>الحد الأدنى للعمر:</strong> يجب أن يكون عمر السائق 19 سنة أو أكثر قد يتطلب عمر أكبر لبعض المدن والسيارات</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>المستندات المطلوبة:</strong> الرخصة المحلية - الرخصة الدولية - جواز السفر</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>التأمين:</strong> يشمل السعر تأميناً شاملاً ضد الحوادث والسرقة</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>الوديعة:</strong> قد يتم طلب وديعــة مستردة عند استلام السيارة</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>الوقود:</strong> يتم تسليم السيارة بوقود كامل ويجب إرجاعها بنفس الحالة</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>المسافة المقطوعة:</strong> جميع السيارات عداد مفتوح</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>الممنوعات:</strong> يحظر التدخين أو قيادة السيارة تحت تأثير أي مواد مخدرة</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>التسليم والاستلام:</strong> متوفر في المطار أو العنوان المطلوب</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>الأطفال:</strong> يجب ابلاغنا بوجود الأطفال تحت 10 سنوات لضرورة توفير الكرسي</li>
-                        <li><i class="fas fa-check-circle"></i> <strong>النظافة:</strong> يجب اعادة السيارة بحالة نظيفة</li>
-                    </ul>
-                </div>
-                
-                <div class="form-instructions">
-                    <h4><i class="fas fa-info-circle"></i> كيفية إكمال الحجز:</h4>
-                    <ol>
-                        <li>املأ جميع البيانات المطلوبة في النموذج أعلاه</li>
-                        <li>اضغط على زر "إرسال طلب تأجير السيارة"</li>
-                        <li>سيتم فتح تطبيق واتساب على جهازك تلقائياً</li>
-                        <li>ستجد الرسالة جاهزة مع كل بياناتك، فقط اضغط "إرسال"</li>
-                        <li>سنتصل بك خلال 24 ساعة لتأكيد الحجز وتفاصيل الدفع</li>
-                    </ol>
-                </div>
             </div>
         </div>
     </div>
@@ -308,6 +980,320 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script>
+        // فتح واتساب
+        function openWhatsApp(phoneNumber) {
+            const message = "مرحباً، أريد الاستفسار عن خدمات راوند تريب";
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                window.location.href = whatsappUrl;
+            } else {
+                window.open(whatsappUrl, '_blank');
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // تعبئة خيارات العمر (19-65)
+            const driverAgeSelect = document.getElementById('driverAge');
+            if (driverAgeSelect) {
+                for (let i = 19; i <= 65; i++) {
+                    const option = document.createElement('option');
+                    option.value = i;
+                    option.textContent = i + ' سنة';
+                    driverAgeSelect.appendChild(option);
+                }
+            }
+            
+            // تعبئة خيارات عدد البالغين (1-9)
+            const totalAdultsSelect = document.getElementById('totalAdults');
+            if (totalAdultsSelect) {
+                for (let i = 1; i <= 9; i++) {
+                    const option = document.createElement('option');
+                    option.value = i;
+                    option.textContent = i + ' شخص';
+                    totalAdultsSelect.appendChild(option);
+                }
+            }
+            
+            // تعبئة خيارات عدد الأطفال (1-7)
+            const childrenCountSelect = document.getElementById('childrenCount');
+            if (childrenCountSelect) {
+                for (let i = 1; i <= 7; i++) {
+                    const option = document.createElement('option');
+                    option.value = i;
+                    option.textContent = i + ' طفل';
+                    childrenCountSelect.appendChild(option);
+                }
+            }
+            
+            // تعيين الحد الأدنى للتاريخ على اليوم الحالي
+            const today = new Date().toISOString().split('T')[0];
+            const pickupDate = document.getElementById('pickupDate');
+            const returnDate = document.getElementById('returnDate');
+            
+            if (pickupDate) pickupDate.min = today;
+            if (returnDate) returnDate.min = today;
+            
+            // تحميل صورة اللوجو في حالة عدم وجودها
+            const logo = document.querySelector('.logo');
+            if (logo) {
+                logo.onerror = function() {
+                    this.style.display = 'none';
+                };
+            }
+            
+            // التحقق من التواريخ عند التغيير
+            if (pickupDate && returnDate) {
+                pickupDate.addEventListener('change', function() {
+                    returnDate.min = this.value;
+                    if (returnDate.value && returnDate.value < this.value) {
+                        returnDate.value = this.value;
+                        // إذا كان التاريخان متساويين، تحقق من الوقت
+                        const pickupTime = document.getElementById('pickupTime');
+                        const returnTime = document.getElementById('returnTime');
+                        if (returnTime && pickupTime && returnTime.value < pickupTime.value) {
+                            returnTime.value = pickupTime.value;
+                        }
+                    }
+                });
+                
+                returnDate.addEventListener('change', function() {
+                    if (this.value < pickupDate.value) {
+                        alert('❌ خطأ: تاريخ التسليم يجب أن يكون بعد تاريخ الاستلام');
+                        this.value = pickupDate.value;
+                    }
+                });
+            }
+            
+            const pickupTime = document.getElementById('pickupTime');
+            const returnTime = document.getElementById('returnTime');
+            
+            if (pickupTime && returnTime) {
+                pickupTime.addEventListener('change', function() {
+                    if (pickupDate && returnDate && pickupDate.value === returnDate.value) {
+                        returnTime.min = this.value;
+                        if (returnTime.value && returnTime.value < this.value) {
+                            returnTime.value = this.value;
+                        }
+                    }
+                });
+                
+                returnTime.addEventListener('change', function() {
+                    if (pickupDate && returnDate && pickupDate.value === returnDate.value && pickupTime && this.value < pickupTime.value) {
+                        alert('❌ خطأ: وقت التسليم يجب أن يكون بعد وقت الاستلام');
+                        this.value = pickupTime.value;
+                    }
+                });
+            }
+        });
+        
+        // خيارات مكان التسليم
+        function selectReturnOption(option) {
+            const options = document.querySelectorAll('.return-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            if (option === 'same') {
+                options[0].classList.add('selected');
+                document.getElementById('returnOption').value = 'same';
+                document.getElementById('returnLocationContainer').style.display = 'none';
+                const pickupLocation = document.getElementById('pickupLocation').value;
+                document.getElementById('returnLocation').value = pickupLocation || 'نفس مكان الاستلام';
+            } else {
+                options[1].classList.add('selected');
+                document.getElementById('returnOption').value = 'different';
+                document.getElementById('returnLocationContainer').style.display = 'block';
+                document.getElementById('returnLocation').value = '';
+                document.getElementById('returnLocation').focus();
+            }
+        }
+        
+        // تحديث مكان التسليم عند تغيير مكان الاستلام
+        document.getElementById('pickupLocation').addEventListener('input', function() {
+            if (document.getElementById('returnOption').value === 'same') {
+                document.getElementById('returnLocation').value = this.value;
+            }
+        });
+        
+        // تفعيل خيارات أعمار الأطفال
+        function toggleChildAges(count) {
+            const childAgeGroup = document.getElementById('childAgeGroup');
+            const childAgeInputs = document.getElementById('childAgeInputs');
+            
+            if (count > 0) {
+                childAgeGroup.style.display = 'block';
+                childAgeInputs.innerHTML = '';
+                
+                for (let i = 1; i <= count; i++) {
+                    const ageSelect = document.createElement('div');
+                    ageSelect.className = 'form-group';
+                    ageSelect.innerHTML = `
+                        <label for="childAge${i}">عمر الطفل ${i}</label>
+                        <select id="childAge${i}" name="childAge${i}" required>
+                            <option value="">اختر العمر</option>
+                            <option value="1">1 سنة</option>
+                            <option value="2">2 سنوات</option>
+                            <option value="3">3 سنوات</option>
+                            <option value="4">4 سنوات</option>
+                            <option value="5">5 سنوات</option>
+                            <option value="6">6 سنوات</option>
+                            <option value="7">7 سنوات</option>
+                            <option value="8">8 سنوات</option>
+                            <option value="9">9 سنوات</option>
+                            <option value="10">10 سنوات</option>
+                        </select>
+                    `;
+                    childAgeInputs.appendChild(ageSelect);
+                }
+            } else {
+                childAgeGroup.style.display = 'none';
+                childAgeInputs.innerHTML = '';
+            }
+        }
+        
+        // التحقق من حد الركاب
+        function checkPassengerLimit() {
+            const totalAdults = parseInt(document.getElementById('totalAdults').value) || 0;
+            const childrenCount = parseInt(document.getElementById('childrenCount').value) || 0;
+            const totalPassengers = totalAdults + childrenCount;
+            const errorElement = document.getElementById('passengerLimitError');
+            
+            if (errorElement) {
+                if (totalPassengers > 9) {
+                    errorElement.style.display = 'block';
+                    errorElement.textContent = `❌ الخطأ: عدد الركاب ${totalPassengers} يتجاوز الحد الأقصى (9 ركاب). إذا كنت بحاجة إلى أكثر من 9 ركاب، يرجى الاتصال بنا مباشرة لتأجير سيارتين.`;
+                    return false;
+                } else {
+                    errorElement.style.display = 'none';
+                    return true;
+                }
+            }
+            return true;
+        }
+        
+        // التحقق من التواريخ قبل الإرسال
+        function validateCarRentalDates() {
+            const pickupDate = document.getElementById('pickupDate');
+            const pickupTime = document.getElementById('pickupTime');
+            const returnDate = document.getElementById('returnDate');
+            const returnTime = document.getElementById('returnTime');
+            
+            if (!pickupDate || !returnDate) return true;
+            
+            const pickupDateTime = new Date(pickupDate.value + ' ' + (pickupTime?.value || '00:00'));
+            const returnDateTime = new Date(returnDate.value + ' ' + (returnTime?.value || '00:00'));
+            
+            if (returnDateTime < pickupDateTime) {
+                alert('❌ خطأ: تاريخ/وقت التسليم يجب أن يكون بعد تاريخ/وقت الاستلام');
+                returnDate.focus();
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // معالجة إرسال النموذج
+        document.getElementById('carRentalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // التحقق من التواريخ وحد الركاب
+            if (!validateCarRentalDates() || !checkPassengerLimit()) {
+                return;
+            }
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const data = {};
+            const paymentMethods = [];
+            const childAges = [];
+            
+            // جمع بيانات أعمار الأطفال
+            const childrenCount = parseInt(formData.get('childrenCount') || 0);
+            for (let i = 1; i <= childrenCount; i++) {
+                const age = formData.get(`childAge${i}`);
+                if (age) childAges.push(age + ' سنوات');
+            }
+            
+            formData.forEach((value, key) => {
+                if (key.startsWith('childAge')) return;
+                if (key === 'paymentMethod') {
+                    paymentMethods.push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+            
+            // بناء الرسالة
+            const paymentMethodsStr = paymentMethods.length > 0 ? paymentMethods.join('، ') : 'غير محدد';
+            const childrenInfo = childrenCount > 0 ? `${childrenCount} طفل، أعمارهم: ${childAges.join('، ')}` : 'لا يوجد أطفال';
+            const returnLocation = data.returnOption === 'same' ? 'نفس مكان الاستلام' : data.returnLocation;
+            
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            }).replace(',', '');
+            
+            const message = `*طلب تأجير سيارة - راوند تريب*
+
+*المعلومات الشخصية:*
+• الاسم: ${data.carName || 'غير محدد'}
+• رقم التواصل: ${data.carPhone || 'غير محدد'}
+• البريد: ${data.carEmail || 'غير محدد'}
+
+*تفاصيل الرحلة:*
+• مكان الاستلام: ${data.pickupLocation || 'غير محدد'}
+• تاريخ الاستلام: ${data.pickupDate || 'غير محدد'}
+• وقت الاستلام: ${data.pickupTime || 'غير محدد'}
+• مكان التسليم: ${returnLocation || 'غير محدد'}
+• تاريخ التسليم: ${data.returnDate || 'غير محدد'}
+• وقت التسليم: ${data.returnTime || 'غير محدد'}
+
+*تفاصيل السيارة:*
+• نوع السيارة المفضل: ${data.carType || 'غير محدد'}
+• عمر السائق: ${data.driverAge || 'غير محدد'} سنة
+• عدد البالغين: ${data.totalAdults || 'غير محدد'}
+• الأطفال: ${childrenInfo}
+• شنط كبيرة: ${data.largeBags || '0'}
+• شنط صغيرة: ${data.smallBags || '0'}
+
+*معلومات إضافية:*
+• دول أخرى ستزورونها غير بلد الاستلام والتسليم: ${data.otherCountries || 'لا يوجد'}
+• طريقة الدفع المفضلة: ${paymentMethodsStr}
+
+*ملاحظات إضافية:*
+${data.carNotes || 'لا توجد ملاحظات'}
+
+*تم إرسال الطلب في:* ${formattedDate}
+*رقم التواصل:* ${data.carPhone || 'غير محدد'}
+
+--- راوند تريب - خدمة تأجير السيارات ---`;
+            
+            sendWhatsAppMessage(message);
+            setTimeout(() => form.reset(), 2000);
+        });
+        
+        // دالة عامة لإرسال الرسائل عبر واتساب
+        function sendWhatsAppMessage(message) {
+            const encodedMessage = encodeURIComponent(message);
+            const companyWhatsappNumber = "96565750302";
+            const whatsappUrl = `https://wa.me/${companyWhatsappNumber}?text=${encodedMessage}`;
+            
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                window.location.href = whatsappUrl;
+            } else {
+                window.open(whatsappUrl, '_blank');
+            }
+            
+            setTimeout(() => {
+                alert('✅ تم تجهيز طلبك بنجاح!\n\nسيتم الآن فتح تطبيق واتساب. تأكد من ظهور جميع بياناتك في الرسالة ثم انقر على زر الإرسال.\n\nشكراً لاختيارك راوند تريب!');
+            }, 500);
+        }
+    </script>
 </body>
 </html>
