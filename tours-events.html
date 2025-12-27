@@ -9,6 +9,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* إضافة خاصة للصفحة */
+        .driver-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .driver-feature {
+            text-align: center;
+            padding: 25px;
+            background: var(--light-beige);
+            border-radius: 15px;
+            border: 2px solid var(--sage-green);
+        }
+        
+        .driver-feature i {
+            font-size: 40px;
+            color: var(--olive-dark);
+            margin-bottom: 15px;
+        }
+        
+        .driver-feature p {
+            font-weight: bold;
+            color: var(--olive-dark);
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
     <!-- الهيدر والشعار -->
@@ -155,21 +184,24 @@
                         <textarea id="toursSpecialRequests" name="toursSpecialRequests" rows="4" placeholder="اذكر أي تفاصيل إضافية مثل: المعالم المفضلة، نوع الفعاليات، متطلبات خاصة..."></textarea>
                     </div>
                     
-                    <button type="submit" class="submit-btn">
-                        <i class="fab fa-whatsapp whatsapp-icon"></i> إرسال طلب تنظيم الرحلة
-                    </button>
+                    <div class="form-instructions">
+                        <h4><i class="fas fa-info-circle"></i> كيفية إكمال الحجز:</h4>
+                        <ol>
+                            <li>املأ جميع البيانات المطلوبة في النموذج أعلاه</li>
+                            <li>اضغط على زر "إرسال طلب تنظيم الرحلة"</li>
+                            <li>سيتم فتح تطبيق واتساب على جهازك تلقائياً</li>
+                            <li>ستجد الرسالة جاهزة مع كل بياناتك، فقط اضغط "إرسال"</li>
+                            <li>سنتصل بك خلال 24 ساعة لتأكيد الحجز وتفاصيل الدفع</li>
+                        </ol>
+                    </div>
+                    
+                    <!-- زر الإرسال في النهاية -->
+                    <div class="submit-btn-container">
+                        <button type="submit" class="submit-btn">
+                            <i class="fab fa-whatsapp whatsapp-icon"></i> إرسال طلب تنظيم الرحلة
+                        </button>
+                    </div>
                 </form>
-                
-                <div class="form-instructions">
-                    <h4><i class="fas fa-info-circle"></i> كيفية إكمال الحجز:</h4>
-                    <ol>
-                        <li>املأ جميع البيانات المطلوبة في النموذج أعلاه</li>
-                        <li>اضغط على زر "إرسال طلب تنظيم الرحلة"</li>
-                        <li>سيتم فتح تطبيق واتساب على جهازك تلقائياً</li>
-                        <li>ستجد الرسالة جاهزة مع كل بياناتك، فقط اضغط "إرسال"</li>
-                        <li>سنتصل بك خلال 24 ساعة لتأكيد الحجز وتفاصيل الدفع</li>
-                    </ol>
-                </div>
             </div>
         </div>
     </div>
@@ -219,6 +251,150 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script>
+        // ===== دالة فتح واتساب =====
+        function openWhatsApp(phoneNumber) {
+            const message = "مرحباً، أريد الاستفسار عن خدمات راوند تريب";
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                window.location.href = whatsappUrl;
+            } else {
+                window.open(whatsappUrl, '_blank');
+            }
+        }
+        
+        // ===== تهيئة الصفحة عند التحميل =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // تعيين الحد الأدنى للتاريخ على اليوم الحالي
+            const today = new Date().toISOString().split('T')[0];
+            const toursStartDate = document.getElementById('toursStartDate');
+            
+            if (toursStartDate) {
+                toursStartDate.min = today;
+                
+                toursStartDate.addEventListener('change', function() {
+                    const selectedDate = new Date(this.value);
+                    const todayDate = new Date();
+                    
+                    if (selectedDate < todayDate) {
+                        alert('❌ خطأ: تاريخ السفر يجب أن يكون في المستقبل');
+                        this.value = today;
+                    }
+                });
+            }
+            
+            // تحميل صورة اللوجو في حالة عدم وجودها
+            const logo = document.querySelector('.logo');
+            if (logo) {
+                logo.onerror = function() {
+                    this.style.display = 'none';
+                };
+            }
+        });
+        
+        // ===== معالجة إرسال النموذج =====
+        document.getElementById('toursForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const data = {};
+            const activities = [];
+            
+            formData.forEach((value, key) => {
+                if (key === 'tourActivity') {
+                    activities.push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+            
+            const activitiesStr = activities.length > 0 ? activities.join('، ') : 'غير محدد';
+            
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            }).replace(',', '');
+            
+            const message = `*طلب تنظيم رحلة/فعالية - راوند تريب*
+
+*المعلومات الشخصية:*
+• الاسم: ${data.toursName || 'غير محدد'}
+• رقم التواصل: ${data.toursPhone || 'غير محدد'}
+• البريد: ${data.toursEmail || 'غير محدد'}
+
+*تفاصيل الرحلة:*
+• نوع الخدمة: ${data.toursType || 'غير محدد'}
+• الوجهة: ${data.toursDestination || 'غير محدد'}
+• عدد الأشخاص: ${data.toursPeople || 'غير محدد'}
+• تاريخ السفر: ${data.toursStartDate || 'غير محدد'}
+• مدة الرحلة: ${data.toursDuration || 'غير محدد'} يوم
+• الميزانية: ${data.toursBudget || '0'} ${data.toursCurrency || 'دينار كويتي'}
+
+*الأنشطة المطلوبة:*
+${activitiesStr}
+
+*تفاصيل إضافية:*
+${data.toursSpecialRequests || 'لا توجد تفاصيل إضافية'}
+
+*تم إرسال الطلب في:* ${formattedDate}
+*رقم التواصل:* ${data.toursPhone || 'غير محدد'}
+
+--- راوند تريب - خدمة تنظيم الرحلات والفعاليات ---`;
+            
+            sendWhatsAppMessage(message);
+            setTimeout(() => form.reset(), 2000);
+        });
+        
+        // ===== دالة عامة لإرسال الرسائل عبر واتساب =====
+        function sendWhatsAppMessage(message) {
+            const encodedMessage = encodeURIComponent(message);
+            const companyWhatsappNumber = "96565750302";
+            const whatsappUrl = `https://wa.me/${companyWhatsappNumber}?text=${encodedMessage}`;
+            
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                window.location.href = whatsappUrl;
+            } else {
+                window.open(whatsappUrl, '_blank');
+            }
+            
+            setTimeout(() => {
+                alert('✅ تم تجهيز طلبك بنجاح!\n\nسيتم الآن فتح تطبيق واتساب. تأكد من ظهور جميع بياناتك في الرسالة ثم انقر على زر الإرسال.\n\nشكراً لاختيارك راوند تريب!');
+            }, 500);
+        }
+        
+        // ===== إخفاء الهيدر عند التمرير =====
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+        const banner = document.querySelector('.banner');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // التمرير لأسفل - إخفاء
+                header.style.transform = 'translateY(-100%)';
+                header.style.transition = 'transform 0.3s ease-in-out';
+                if (banner) {
+                    banner.style.transform = 'translateY(-100%)';
+                    banner.style.transition = 'transform 0.3s ease-in-out';
+                }
+            } else {
+                // التمرير لأعلى - إظهار
+                header.style.transform = 'translateY(0)';
+                if (banner) {
+                    banner.style.transform = 'translateY(0)';
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
 </body>
 </html>
