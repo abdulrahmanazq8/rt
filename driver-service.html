@@ -73,9 +73,9 @@
                     </div>
                 </div>
                 
+                <h2 class="section-title">طلب خدمة السائق الخاص</h2>
+                
                 <form id="driverForm">
-                    <h3 style="color: var(--olive-dark); margin-bottom: 30px; text-align: center;">نموذج طلب خدمة السائق الخاص</h3>
-                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="driverName" class="required">الاسم</label>
@@ -181,9 +181,11 @@
                         <textarea id="driverNotes" name="driverNotes" rows="4" placeholder="أي تفاصيل إضافية أو طلبات خاصة..."></textarea>
                     </div>
                     
-                    <button type="submit" class="submit-btn">
-                        <i class="fab fa-whatsapp whatsapp-icon"></i> إرسال طلب خدمة السائق الخاص
-                    </button>
+                    <div class="submit-btn-container">
+                        <button type="submit" class="submit-btn">
+                            <i class="fab fa-whatsapp whatsapp-icon"></i> إرسال طلب خدمة السائق الخاص
+                        </button>
+                    </div>
                 </form>
                 
                 <div class="form-instructions">
@@ -246,5 +248,107 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+        // دالة التحقق من عدد الركاب
+        function checkDriverPassengerLimit(select) {
+            const warning = document.getElementById('driverPassengerWarning');
+            if (select.value === 'more') {
+                warning.style.display = 'block';
+            } else {
+                warning.style.display = 'none';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // معالجة إرسال نموذج السائق
+            const driverForm = document.getElementById('driverForm');
+            if (driverForm) {
+                driverForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(driverForm);
+                    const data = {};
+                    const tripTypes = [];
+                    
+                    formData.forEach((value, key) => {
+                        if (key === 'tripType') {
+                            tripTypes.push(value);
+                        } else {
+                            data[key] = value;
+                        }
+                    });
+                    
+                    const tripTypesStr = tripTypes.length > 0 ? tripTypes.join('، ') : 'غير محدد';
+                    
+                    // بناء رسالة واتساب
+                    const now = new Date();
+                    const formattedDate = now.toLocaleDateString('en-GB', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                    }).replace(',', '');
+                    
+                    const message = `*طلب خدمة سائق خاص - راوند تريب*
+
+*المعلومات الشخصية:*
+• الاسم: ${data.driverName || 'غير محدد'}
+• رقم التواصل: ${data.driverPhone || 'غير محدد'}
+• البريد الإلكتروني: ${data.driverEmail || 'غير محدد'}
+• المدينة/الدولة: ${data.driverCity || 'غير محدد'}
+
+*تفاصيل الرحلة:*
+• مكان الانطلاق: ${data.fromLocation || 'غير محدد'}
+• مكان الوصول: ${data.toLocation || 'غير محدد'}
+• عدد الأشخاص: ${data.driverPassengers || 'غير محدد'}
+• نوع الرحلات المطلوبة: ${tripTypesStr}
+• نوع السيارة المطلوبة: ${data.driverCarType || 'غير محدد'}
+• عدد الأيام المطلوبة: ${data.driverServiceDays || 'غير محدد'}
+
+*ملاحظات إضافية:*
+${data.driverNotes || 'لا توجد ملاحظات'}
+
+*تم إرسال الطلب في:* ${formattedDate}
+*رقم التواصل:* ${data.driverPhone || 'غير محدد'}
+
+--- راوند تريب - خدمة السائق الخاص ---`;
+                    
+                    sendWhatsAppMessage(message);
+                    setTimeout(() => driverForm.reset(), 2000);
+                });
+            }
+        });
+        
+        function sendWhatsAppMessage(message) {
+            const encodedMessage = encodeURIComponent(message);
+            const companyWhatsappNumber = "96565750302";
+            const whatsappUrl = `https://wa.me/${companyWhatsappNumber}?text=${encodedMessage}`;
+            
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                window.location.href = whatsappUrl;
+            } else {
+                window.open(whatsappUrl, '_blank');
+            }
+            
+            setTimeout(() => {
+                alert('✅ تم تجهيز طلبك بنجاح!\n\nسيتم الآن فتح تطبيق واتساب. تأكد من ظهور جميع بياناتك في الرسالة ثم انقر على زر الإرسال.\n\nشكراً لاختيارك راوند تريب!');
+            }, 500);
+        }
+        
+        // دالة فتح واتساب (مشتركة)
+        function openWhatsApp(phoneNumber) {
+            const message = "مرحباً، أريد الاستفسار عن خدمات راوند تريب";
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                window.location.href = whatsappUrl;
+            } else {
+                window.open(whatsappUrl, '_blank');
+            }
+        }
+    </script>
 </body>
 </html>
