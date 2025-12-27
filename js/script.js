@@ -883,4 +883,88 @@ window.addEventListener('load', function() {
 if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
     document.addEventListener('touchstart', function() {}, {passive: true});
     document.addEventListener('scroll', adjustHeaderSpace, {passive: true});
+
+    // إصلاح مساحة الهيدر ديناميكياً
+function adjustHeaderSpace() {
+    const header = document.querySelector('.header');
+    const main = document.querySelector('main');
+    
+    if (header && main) {
+        const headerHeight = header.offsetHeight;
+        
+        // على الجوال نزيد المساحة قليلاً
+        if (window.innerWidth <= 768) {
+            main.style.paddingTop = (headerHeight + 20) + 'px';
+        } else {
+            main.style.paddingTop = headerHeight + 'px';
+        }
+    }
+}
+
+// دالة لضمان بقاء الفوتر في الأسفل
+function fixFooterPosition() {
+    const main = document.querySelector('main');
+    const footer = document.querySelector('.footer');
+    
+    if (main && footer) {
+        const windowHeight = window.innerHeight;
+        const mainHeight = main.offsetHeight;
+        const footerHeight = footer.offsetHeight;
+        const headerHeight = document.querySelector('.header').offsetHeight;
+        
+        // إذا كان المحتوى قصيراً، نضبط ارتفاع main ليدفع الفوتر للأسفل
+        if (mainHeight + footerHeight + headerHeight < windowHeight) {
+            main.style.minHeight = (windowHeight - footerHeight - headerHeight - 20) + 'px';
+        } else {
+            main.style.minHeight = 'auto';
+        }
+    }
+}
+
+// استدعاء الدوال عند تحميل الصفحة وتغيير الحجم
+document.addEventListener('DOMContentLoaded', function() {
+    adjustHeaderSpace();
+    fixFooterPosition();
+    
+    // إضافة حدث إخفاء/إظهار الهيدر
+    let lastScrollTop = 0;
+    const header = document.querySelector('.header');
+    
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // التمرير لأسفل - إخفاء
+            header.classList.add('hidden');
+        } else {
+            // التمرير لأعلى - إظهار
+            header.classList.remove('hidden');
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+});
+
+window.addEventListener('resize', function() {
+    adjustHeaderSpace();
+    fixFooterPosition();
+});
+
+window.addEventListener('load', function() {
+    adjustHeaderSpace();
+    fixFooterPosition();
+});
+
+// دالة فتح واتساب
+function openWhatsApp(phoneNumber) {
+    const message = "مرحباً، أريد الاستفسار عن خدمات راوند تريب";
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        window.location.href = whatsappUrl;
+    } else {
+        window.open(whatsappUrl, '_blank');
+    }
+}
 }
