@@ -1,0 +1,96 @@
+/* إصلاح مشكلة تثبيت الهيدر على الموبايل */
+@media (max-width: 768px) {
+    body {
+        padding-top: 130px;
+    }
+    
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 10px 15px;
+    }
+    
+    .logo-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .company-info {
+        text-align: center;
+    }
+    
+    .contact-header {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .phone-numbers-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .phone-number {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+    
+    /* إصلاح مشكلة الزوم في حقول الإدخال على iOS */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+    
+    .date-time-input input {
+        font-size: 16px !important;
+    }
+    
+    /* منع التكبير التلقائي في حقول الإدخال */
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+        select,
+        textarea,
+        input {
+            font-size: 16px;
+        }
+    }
+}
+
+/* إصلاح مشكلة الهيدر في iOS */
+@supports (-webkit-touch-callout: none) {
+    .header {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+    
+    body {
+        height: -webkit-fill-available;
+    }
+}
+
+/* تحسين تجربة اللمس على الموبايل */
+@media (hover: none) and (pointer: coarse) {
+    .service-card,
+    .return-option,
+    .checkbox-item,
+    .phone-number {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    input, select, textarea {
+        font-size: 16px;
+        min-height: 44px;
+    }
+    
+    .submit-btn,
+    .whatsapp-btn,
+    .back-btn,
+    .service-link {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
