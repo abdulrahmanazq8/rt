@@ -19,6 +19,7 @@
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 body {
@@ -26,13 +27,13 @@ body {
     color: var(--black);
     background-color: var(--white);
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
     font-family: 'Cairo', sans-serif;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .english-font {
@@ -42,7 +43,7 @@ body {
 /* ===== الهيدر المتحرك ===== */
 .header {
     background: linear-gradient(135deg, var(--olive-dark) 0%, var(--sage-green) 100%);
-    padding: 15px 5%;
+    padding: 12px 5%;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     position: fixed;
     top: 0;
@@ -61,29 +62,21 @@ body {
     transform: translateY(-100%);
 }
 
-/* عنصر main للحاوية الرئيسية */
-main {
-    padding-top: 120px; /* مساحة للهيدر الثابت */
-    min-height: 100vh;
-    display: block;
-    flex: 1;
-}
-
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     cursor: pointer;
 }
 
 .logo {
-    height: 70px;
+    height: 55px;
     width: auto;
-    border-radius: 12px;
+    border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     object-fit: contain;
     background-color: var(--light-beige);
-    padding: 5px;
+    padding: 4px;
 }
 
 .company-info {
@@ -91,24 +84,24 @@ main {
 }
 
 .company-name-ar {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: bold;
     color: white;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
 .company-name-en {
-    font-size: 18px;
+    font-size: 14px;
     color: var(--light-beige);
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     font-weight: 600;
 }
 
 .company-tagline {
     color: rgba(255,255,255,0.9);
-    font-size: 15px;
-    margin-top: 5px;
+    font-size: 12px;
+    margin-top: 3px;
     font-style: italic;
 }
 
@@ -120,14 +113,14 @@ main {
 .whatsapp-btn {
     background: linear-gradient(135deg, #25D366, #128C7E);
     color: white;
-    padding: 12px 25px;
-    border-radius: 30px;
+    padding: 10px 18px;
+    border-radius: 25px;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     transition: all 0.3s;
     box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
     border: none;
@@ -142,20 +135,20 @@ main {
 .phone-numbers-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 8px;
+    margin-top: 8px;
 }
 
 .phone-number {
-    font-size: 20px;
+    font-size: 16px;
     color: white;
     direction: ltr;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-weight: bold;
     background: rgba(255,255,255,0.1);
-    padding: 8px 15px;
+    padding: 6px 12px;
     border-radius: 8px;
     backdrop-filter: blur(5px);
     cursor: pointer;
@@ -172,19 +165,27 @@ main {
     direction: ltr;
     display: inline-block;
     flex: 1;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .flag-icon {
-    width: 24px;
-    height: 16px;
+    width: 20px;
+    height: 14px;
     border-radius: 3px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+/* ===== المحتوى الرئيسي ===== */
+main {
+    flex: 1;
+    width: 100%;
+    padding-top: 100px; /* سيتم ضبطه ديناميكياً بواسطة JS */
+    min-height: calc(100vh - 200px); /* يضمن أن الفوتر يبقى في الأسفل */
+}
+
 /* ===== البانر المتحرك ===== */
 .banner {
-    height: 500px;
+    height: 380px;
     background: linear-gradient(rgba(85, 104, 89, 0.85), rgba(175, 181, 152, 0.8)), url('images/banner.jpg');
     background-size: cover;
     background-position: center;
@@ -193,11 +194,9 @@ main {
     justify-content: center;
     text-align: center;
     color: white;
-    padding: 0 20px;
+    padding: 0 15px;
     position: relative;
-    z-index: 1;
-    margin-top: 0;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -206,12 +205,12 @@ main {
 }
 
 .banner-content {
-    max-width: 900px;
+    max-width: 90%;
     animation: fadeInUp 1s ease-out;
     z-index: 1;
     background-color: rgba(85, 104, 89, 0.8);
-    padding: 40px;
-    border-radius: 15px;
+    padding: 25px;
+    border-radius: 12px;
     backdrop-filter: blur(5px);
 }
 
@@ -227,17 +226,18 @@ main {
 }
 
 .banner h1 {
-    font-size: 52px;
-    margin-bottom: 20px;
+    font-size: 28px;
+    margin-bottom: 15px;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
     color: white;
+    line-height: 1.3;
 }
 
 .banner p {
-    font-size: 22px;
-    margin-bottom: 40px;
-    line-height: 1.6;
-    max-width: 700px;
+    font-size: 16px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -246,41 +246,41 @@ main {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 30px 15px;
 }
 
 .section-title {
     text-align: center;
     color: var(--olive-dark);
-    margin-bottom: 50px;
-    font-size: 36px;
+    margin-bottom: 30px;
+    font-size: 24px;
     position: relative;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 
 .section-title:after {
     content: '';
     display: block;
-    width: 120px;
-    height: 4px;
+    width: 80px;
+    height: 3px;
     background: linear-gradient(to right, var(--sage-green), var(--light-beige));
-    margin: 15px auto;
+    margin: 10px auto;
     border-radius: 2px;
 }
 
 .services {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 35px;
-    margin: 60px 0;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin: 30px 0;
 }
 
 .service-card {
     background: var(--white);
-    border-radius: 20px;
-    padding: 40px 30px;
+    border-radius: 15px;
+    padding: 25px 20px;
     text-align: center;
-    box-shadow: 0 15px 40px rgba(85, 104, 89, 0.1);
+    box-shadow: 0 8px 25px rgba(85, 104, 89, 0.1);
     transition: all 0.4s;
     border: 2px solid var(--light-beige);
     position: relative;
@@ -289,7 +289,7 @@ main {
     display: flex;
     flex-direction: column;
     height: 100%;
-    min-height: 350px;
+    min-height: 280px;
 }
 
 .service-card:before {
@@ -298,23 +298,23 @@ main {
     top: 0;
     left: 0;
     width: 100%;
-    height: 8px;
+    height: 6px;
     background: linear-gradient(to right, var(--sage-green), var(--olive-dark));
 }
 
 .service-card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 25px 50px rgba(85, 104, 89, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(85, 104, 89, 0.2);
     border-color: var(--sage-green);
 }
 
 .service-icon {
-    font-size: 60px;
-    margin-bottom: 30px;
+    font-size: 45px;
+    margin-bottom: 20px;
     color: var(--olive-dark);
-    height: 100px;
-    width: 100px;
-    line-height: 100px;
+    height: 80px;
+    width: 80px;
+    line-height: 80px;
     background: var(--light-beige);
     border-radius: 50%;
     margin-left: auto;
@@ -324,31 +324,31 @@ main {
 
 .service-card h3 {
     color: var(--olive-dark);
-    margin-bottom: 20px;
-    font-size: 28px;
+    margin-bottom: 15px;
+    font-size: 22px;
     flex-grow: 1;
 }
 
 .service-description {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     color: #666;
-    line-height: 1.8;
+    line-height: 1.6;
     flex-grow: 2;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .service-link {
     display: inline-block;
     background: var(--light-beige);
     color: var(--olive-dark);
-    padding: 12px 25px;
-    border-radius: 25px;
+    padding: 10px 20px;
+    border-radius: 20px;
     text-decoration: none;
     font-weight: 700;
     transition: all 0.3s;
     margin-top: auto;
     border: 2px solid var(--sage-green);
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .service-link:hover {
@@ -361,19 +361,19 @@ main {
 .page-header {
     background: linear-gradient(135deg, var(--olive-dark), var(--sage-green));
     color: white;
-    padding: 120px 5% 60px;
+    padding: 40px 5% 30px;
     text-align: center;
-    border-radius: 0 0 30px 30px;
-    margin-bottom: 50px;
+    border-radius: 0 0 20px 20px;
+    margin-bottom: 30px;
 }
 
 .page-title {
-    font-size: 42px;
-    margin-bottom: 15px;
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
 .page-subtitle {
-    font-size: 20px;
+    font-size: 16px;
     opacity: 0.9;
     max-width: 800px;
     margin: 0 auto;
@@ -383,16 +383,16 @@ main {
     background: rgba(255,255,255,0.2);
     color: white;
     border: 2px solid white;
-    padding: 12px 30px;
-    border-radius: 25px;
+    padding: 10px 25px;
+    border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 15px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     transition: all 0.3s;
-    font-size: 18px;
+    font-size: 16px;
     text-decoration: none;
 }
 
@@ -403,18 +403,18 @@ main {
 
 .page-content {
     max-width: 1200px;
-    margin: 0 auto 80px;
-    padding: 0 20px;
+    margin: 0 auto 40px;
+    padding: 0 15px;
 }
 
 /* ===== تأجير سيارات مع سائق خاص ===== */
 .driver-service-section {
     background: var(--white);
-    border-radius: 25px;
-    padding: 50px;
-    margin: 80px auto;
+    border-radius: 20px;
+    padding: 30px 20px;
+    margin: 40px auto;
     max-width: 1000px;
-    box-shadow: 0 15px 40px rgba(85, 104, 89, 0.1);
+    box-shadow: 0 8px 25px rgba(85, 104, 89, 0.1);
     border: 2px solid var(--light-beige);
     position: relative;
     overflow: hidden;
@@ -426,38 +426,38 @@ main {
     top: 0;
     right: 0;
     width: 100%;
-    height: 8px;
+    height: 6px;
     background: linear-gradient(to left, var(--sage-green), var(--olive-dark));
 }
 
 .driver-features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin: 30px 0;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
 }
 
 .driver-feature {
     background: var(--light-beige);
-    padding: 20px;
+    padding: 15px;
     border-radius: 10px;
     text-align: center;
 }
 
 .driver-feature i {
-    font-size: 40px;
+    font-size: 35px;
     color: var(--olive-dark);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 /* ===== نموذج الحجز ===== */
 .booking-section {
     background: var(--white);
-    border-radius: 25px;
-    padding: 50px;
-    margin: 80px auto;
+    border-radius: 20px;
+    padding: 30px 20px;
+    margin: 40px auto;
     max-width: 850px;
-    box-shadow: 0 15px 40px rgba(85, 104, 89, 0.1);
+    box-shadow: 0 8px 25px rgba(85, 104, 89, 0.1);
     border: 2px solid var(--light-beige);
     position: relative;
     overflow: hidden;
@@ -469,32 +469,26 @@ main {
     top: 0;
     right: 0;
     width: 100%;
-    height: 8px;
+    height: 6px;
     background: linear-gradient(to left, var(--sage-green), var(--olive-dark));
 }
 
 .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .form-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-}
-
-@media (max-width: 768px) {
-    .form-row {
-        grid-template-columns: 1fr;
-    }
+    grid-template-columns: 1fr;
+    gap: 20px;
 }
 
 label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: var(--olive-dark);
     font-weight: 700;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .required:after {
@@ -504,9 +498,9 @@ label {
 
 input, select, textarea {
     width: 100%;
-    padding: 16px 20px;
+    padding: 14px 16px;
     border: 2px solid var(--light-beige);
-    border-radius: 12px;
+    border-radius: 10px;
     font-size: 16px;
     transition: all 0.3s;
     background: #f8fafc;
@@ -536,7 +530,7 @@ input, select, textarea {
     transform: translateY(-50%);
     color: var(--olive-dark);
     pointer-events: none;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .time-input:after {
@@ -547,73 +541,74 @@ input, select, textarea {
 .submit-btn-container {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .submit-btn {
     background: linear-gradient(135deg, var(--sage-green), var(--olive-dark));
     color: white;
     border: none;
-    padding: 20px 45px;
-    font-size: 20px;
-    border-radius: 12px;
+    padding: 16px 35px;
+    font-size: 18px;
+    border-radius: 10px;
     cursor: pointer;
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     font-weight: bold;
     transition: all 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    letter-spacing: 1px;
+    gap: 10px;
     font-family: 'Cairo', sans-serif;
 }
 
 .submit-btn:hover {
     background: linear-gradient(135deg, var(--olive-dark), var(--sage-green));
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(85, 104, 89, 0.3);
+    box-shadow: 0 8px 20px rgba(85, 104, 89, 0.3);
 }
 
 .whatsapp-icon {
-    font-size: 24px;
+    font-size: 22px;
 }
 
 /* ===== التوجيهات داخل النماذج ===== */
 .form-instructions {
     background: var(--light-beige);
-    border-radius: 12px;
-    padding: 25px;
-    margin-top: 40px;
-    border-right: 5px solid var(--sage-green);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    border-right: 4px solid var(--sage-green);
 }
 
 .form-instructions h4 {
     color: var(--olive-dark);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+    font-size: 18px;
 }
 
 .form-instructions ol {
     padding-right: 20px;
-    line-height: 2;
+    line-height: 1.8;
+    font-size: 14px;
 }
 
 /* ===== خيارات متعددة ===== */
 .checkbox-group {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 8px;
 }
 
 .checkbox-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .checkbox-item input[type="checkbox"] {
@@ -623,16 +618,16 @@ input, select, textarea {
 /* ===== الشروط العامة ===== */
 .terms-section {
     background: var(--light-beige);
-    border-radius: 15px;
-    padding: 30px;
-    margin-top: 40px;
-    border-right: 5px solid var(--sage-green);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 30px;
+    border-right: 4px solid var(--sage-green);
 }
 
 .terms-section h3 {
     color: var(--olive-dark);
-    margin-bottom: 20px;
-    font-size: 24px;
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
 .terms-list {
@@ -641,12 +636,13 @@ input, select, textarea {
 }
 
 .terms-list li {
-    padding: 10px 0;
+    padding: 8px 0;
     border-bottom: 1px solid rgba(85, 104, 89, 0.1);
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 8px;
     line-height: 1.5;
+    font-size: 14px;
 }
 
 .terms-list li:last-child {
@@ -655,49 +651,50 @@ input, select, textarea {
 
 .terms-list i {
     color: var(--olive-dark);
-    margin-top: 5px;
+    margin-top: 3px;
+    font-size: 14px;
 }
 
 /* ===== خيارات أعمار الأطفال ===== */
 .child-age-group {
     display: none;
-    margin-top: 15px;
-    padding: 15px;
+    margin-top: 12px;
+    padding: 12px;
     background: #f8f9fa;
-    border-radius: 10px;
+    border-radius: 8px;
     border: 1px solid #e9ecef;
 }
 
 .child-age-group .form-row {
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 /* ===== توزيع الأشخاص على الغرف ===== */
 .room-distribution {
     display: none;
-    margin-top: 15px;
-    padding: 15px;
+    margin-top: 12px;
+    padding: 12px;
     background: #f8f9fa;
-    border-radius: 10px;
+    border-radius: 8px;
     border: 1px solid #e9ecef;
 }
 
 .room-distribution .form-row {
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .room-occupancy {
     display: none;
-    margin-top: 15px;
-    padding: 15px;
+    margin-top: 12px;
+    padding: 12px;
     background: #f8f9fa;
-    border-radius: 10px;
+    border-radius: 8px;
     border: 1px solid #e9ecef;
 }
 
 .room-occupancy-item {
-    margin-bottom: 15px;
-    padding-bottom: 15px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
     border-bottom: 1px solid #e9ecef;
 }
 
@@ -709,40 +706,40 @@ input, select, textarea {
 
 .room-occupancy-item h5 {
     color: var(--olive-dark);
-    margin-bottom: 10px;
-    font-size: 16px;
+    margin-bottom: 8px;
+    font-size: 14px;
 }
 
 /* ===== أعمار الأطفال في الفنادق ===== */
 .children-ages-container {
     display: none;
-    margin-top: 15px;
-    padding: 15px;
+    margin-top: 12px;
+    padding: 12px;
     background: #f8f9fa;
-    border-radius: 10px;
+    border-radius: 8px;
     border: 1px solid #e9ecef;
 }
 
 .age-select-group {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
-    margin-top: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
 }
 
 /* ===== خيارات مكان التسليم ===== */
 .return-options {
     display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: 12px;
+    margin-bottom: 12px;
 }
 
 .return-option {
     flex: 1;
     text-align: center;
-    padding: 15px;
+    padding: 12px;
     border: 2px solid var(--light-beige);
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -760,55 +757,59 @@ input, select, textarea {
 .footer {
     background: linear-gradient(135deg, var(--olive-dark) 0%, #445a4a 100%);
     color: white;
-    padding: 70px 5% 30px;
-    margin-top: 80px;
+    padding: 40px 15px 20px;
+    margin-top: 40px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 50px;
+    grid-template-columns: 1fr;
+    gap: 30px;
     max-width: 1200px;
-    margin: 0 auto 50px;
+    margin: 0 auto 30px;
 }
 
 .footer-section h3 {
-    font-size: 22px;
-    margin-bottom: 25px;
+    font-size: 18px;
+    margin-bottom: 15px;
     color: var(--light-beige);
-    padding-bottom: 10px;
-    border-bottom: 2px solid rgba(255,255,255,0.1);
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .footer-contact {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
 }
 
 .footer-contact-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
 }
 
 .social-icons {
     display: flex;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 12px;
+    margin-top: 15px;
 }
 
 .social-icons a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     background: rgba(255,255,255,0.1);
     border-radius: 50%;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     transition: all 0.3s;
 }
 
@@ -819,10 +820,10 @@ input, select, textarea {
 
 .copyright {
     text-align: center;
-    padding-top: 30px;
+    padding-top: 20px;
     border-top: 1px solid rgba(255,255,255,0.1);
     color: rgba(255,255,255,0.7);
-    font-size: 15px;
+    font-size: 13px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -846,15 +847,16 @@ select {
     -moz-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23556859' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: left 15px center;
+    background-position: left 12px center;
     background-size: 12px;
-    padding-left: 40px;
+    padding-left: 35px;
 }
 
 /* ===== تنسيق حقول الميزانية ===== */
 .budget-currency-container {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .budget-currency-container input {
@@ -862,154 +864,236 @@ select {
 }
 
 .budget-currency-container select {
-    width: 150px;
-}
-
-@media (max-width: 768px) {
-    .budget-currency-container {
-        flex-direction: column;
-    }
-    
-    .budget-currency-container select {
-        width: 100%;
-    }
+    width: 100%;
 }
 
 /* ===== رسالة الخطأ ===== */
 .error-message {
     color: #e74c3c;
-    font-size: 14px;
+    font-size: 12px;
     margin-top: 5px;
     display: none;
-    padding: 8px;
+    padding: 6px;
     background-color: #fee;
     border-radius: 5px;
     border: 1px solid #fcc;
 }
 
-/* ===== التجاوب ===== */
-@media (max-width: 992px) {
+/* ===== التجاوب للشاشات المتوسطة ===== */
+@media (min-width: 768px) {
     .header {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-        padding-top: 15px;
-        padding-bottom: 15px;
+        padding: 15px 5%;
     }
     
-    .contact-header {
-        text-align: center;
-    }
-    
-    .banner {
-        height: 400px;
-    }
-    
-    .banner h1 {
-        font-size: 32px;
-    }
-    
-    .banner p {
-        font-size: 18px;
-    }
-    
-    .banner-content {
-        padding: 25px;
+    .logo {
+        height: 70px;
     }
     
     .company-name-ar {
-        font-size: 28px;
-    }
-    
-    .booking-section, .driver-service-section {
-        padding: 30px 20px;
-        margin: 40px 15px;
-    }
-    
-    .page-title {
         font-size: 32px;
     }
     
-    .services {
-        grid-template-columns: 1fr;
+    .company-name-en {
+        font-size: 18px;
     }
     
-    .phone-numbers-container {
-        align-items: center;
+    .company-tagline {
+        font-size: 15px;
+    }
+    
+    .whatsapp-btn {
+        padding: 12px 25px;
+        font-size: 16px;
     }
     
     .phone-number {
-        font-size: 16px;
-        padding: 8px 12px;
+        font-size: 18px;
+        padding: 8px 15px;
     }
     
     .phone-number a {
-        font-size: 16px;
+        font-size: 18px;
     }
     
-    .page-header {
-        padding: 120px 5% 40px;
+    .flag-icon {
+        width: 24px;
+        height: 16px;
     }
-}
-
-@media (max-width: 576px) {
+    
+    main {
+        padding-top: 130px;
+    }
+    
     .banner {
-        height: 350px;
+        height: 450px;
     }
     
     .banner h1 {
-        font-size: 26px;
+        font-size: 38px;
     }
     
     .banner p {
-        font-size: 16px;
+        font-size: 20px;
+    }
+    
+    .banner-content {
+        padding: 35px;
+        max-width: 800px;
+    }
+    
+    .container {
+        padding: 40px 20px;
     }
     
     .section-title {
-        font-size: 24px;
+        font-size: 28px;
+        margin-bottom: 40px;
+    }
+    
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        margin: 40px 0;
     }
     
     .service-card {
-        padding: 25px 20px;
-        min-height: 280px;
+        padding: 30px 25px;
+        min-height: 320px;
     }
     
     .service-icon {
         font-size: 50px;
-        height: 70px;
-        width: 70px;
-        line-height: 70px;
+        height: 90px;
+        width: 90px;
+        line-height: 90px;
     }
     
-    .form-group {
-        margin-bottom: 20px;
+    .service-card h3 {
+        font-size: 24px;
     }
     
-    .return-options {
-        flex-direction: column;
+    .service-description {
+        font-size: 17px;
     }
     
-    .driver-features {
-        grid-template-columns: 1fr;
+    .service-link {
+        padding: 12px 25px;
+        font-size: 17px;
     }
     
     .page-header {
-        padding: 120px 5% 30px;
+        padding: 50px 5% 40px;
+    }
+    
+    .page-title {
+        font-size: 36px;
+    }
+    
+    .page-subtitle {
+        font-size: 18px;
+    }
+    
+    .back-btn {
+        padding: 12px 30px;
+    }
+    
+    .driver-service-section {
+        padding: 40px 35px;
+    }
+    
+    .booking-section {
+        padding: 40px 35px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+    
+    .budget-currency-container {
+        flex-direction: row;
+    }
+    
+    .budget-currency-container select {
+        width: 150px;
+    }
+    
+    .footer {
+        padding: 50px 5% 30px;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
+    
+    .footer-section h3 {
+        font-size: 20px;
+    }
+    
+    .footer-contact-item {
+        font-size: 16px;
     }
 }
 
-/* ===== إصلاحات إضافية للجوال ===== */
-@media (max-width: 768px) {
-    main {
-        padding-top: 150px; /* مساحة أكبر للهيدر على الجوال */
+/* ===== التجاوب للشاشات الكبيرة ===== */
+@media (min-width: 992px) {
+    .header {
+        flex-direction: row;
+        text-align: left;
+        gap: 0;
+    }
+    
+    .contact-header {
+        text-align: right;
+    }
+    
+    .phone-numbers-container {
+        align-items: flex-end;
+    }
+    
+    .services {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin: 50px 0;
+    }
+    
+    .service-card {
+        min-height: 350px;
+    }
+    
+    .container {
+        padding: 50px 20px;
+    }
+    
+    .section-title {
+        font-size: 32px;
     }
     
     .banner {
-        margin-top: 0;
+        height: 500px;
     }
     
+    .banner h1 {
+        font-size: 46px;
+    }
+    
+    .banner p {
+        font-size: 22px;
+    }
+    
+    .banner-content {
+        max-width: 850px;
+    }
+}
+
+/* ===== إصلاحات خاصة للجوال ===== */
+@media (max-width: 767px) {
     .header {
-        padding: 10px 15px;
+        padding: 10px 4%;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
     }
     
     .logo-container {
@@ -1031,29 +1115,117 @@ select {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+        gap: 8px;
     }
     
     .phone-number {
         font-size: 14px;
         padding: 6px 10px;
+        flex: 1;
+        min-width: 160px;
+        justify-content: center;
     }
     
-    /* إصلاح مشكلة الزوم في حقول الإدخال على iOS */
+    .phone-number a {
+        font-size: 14px;
+    }
+    
+    main {
+        padding-top: 180px; /* مساحة أكبر للهيدر على الجوال */
+        min-height: calc(100vh - 250px);
+    }
+    
+    .banner {
+        height: 320px;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+    
+    .banner-content {
+        padding: 20px;
+    }
+    
+    .banner h1 {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+    
+    .banner p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    
+    .container {
+        padding: 20px 15px;
+    }
+    
+    .section-title {
+        font-size: 22px;
+        margin-bottom: 25px;
+    }
+    
+    .service-card {
+        padding: 20px 15px;
+        min-height: 260px;
+    }
+    
+    .service-icon {
+        font-size: 40px;
+        height: 70px;
+        width: 70px;
+        line-height: 70px;
+        margin-bottom: 15px;
+    }
+    
+    .service-card h3 {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+    
+    .service-description {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .service-link {
+        padding: 8px 18px;
+        font-size: 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
     input, select, textarea {
-        font-size: 16px !important;
+        padding: 12px 14px;
+        font-size: 16px; /* مهم لمنع التكبير في iOS */
     }
     
-    .date-time-input input {
-        font-size: 16px !important;
+    .submit-btn {
+        padding: 14px 25px;
+        font-size: 16px;
     }
     
-    /* منع التكبير التلقائي في حقول الإدخال */
-    @media screen and (-webkit-min-device-pixel-ratio:0) {
-        select,
-        textarea,
-        input {
-            font-size: 16px;
-        }
+    .footer {
+        padding: 30px 15px 15px;
+        margin-top: 30px;
+    }
+    
+    .footer-section {
+        margin-bottom: 20px;
+    }
+    
+    .footer-section h3 {
+        font-size: 18px;
+    }
+    
+    .footer-contact-item {
+        font-size: 14px;
+    }
+    
+    .copyright {
+        font-size: 12px;
+        padding-top: 15px;
     }
 }
 
@@ -1092,5 +1264,54 @@ select {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+}
+
+/* منع التكبير التلقائي في حقول الإدخال على iOS */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select,
+    textarea,
+    input {
+        font-size: 16px;
+    }
+}
+
+/* تحسينات إضافية للشاشات الصغيرة جداً */
+@media (max-width: 360px) {
+    .phone-number {
+        min-width: 140px;
+        font-size: 13px;
+    }
+    
+    .phone-number a {
+        font-size: 13px;
+    }
+    
+    .banner h1 {
+        font-size: 22px;
+    }
+    
+    .banner p {
+        font-size: 13px;
+    }
+    
+    .service-card {
+        min-height: 240px;
+        padding: 15px 12px;
+    }
+    
+    .service-icon {
+        font-size: 35px;
+        height: 60px;
+        width: 60px;
+        line-height: 60px;
+    }
+    
+    .service-card h3 {
+        font-size: 18px;
+    }
+    
+    .service-description {
+        font-size: 14px;
     }
 }
