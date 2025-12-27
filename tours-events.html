@@ -37,6 +37,22 @@
             color: var(--olive-dark);
             font-size: 18px;
         }
+        
+        /* إصلاح مشكلة العنوان المغطى */
+        body {
+            padding-top: 0;
+        }
+        
+        main {
+            padding-top: 120px;
+        }
+        
+        .page-header {
+            padding-top: 40px !important; /* تقليل padding-top */
+            margin-top: 0 !important;
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -73,138 +89,141 @@
         </div>
     </header>
 
-    <!-- محتوى صفحة تنظيم الرحلات -->
-    <div class="page-header">
-        <h1 class="page-title">تنظيم الرحلات والفعاليات</h1>
-        <p class="page-subtitle">تنظيم برامج سياحية مخصصة، حجوزات تذاكر معالم سياحية وفعاليات وأنشطة ترفيهية</p>
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
-    </div>
-    
-    <div class="page-content">
-        <div class="container">
-            <div class="booking-section">
-                <h2 class="section-title">طلب تنظيم رحلة/فعالية</h2>
-                
-                <form id="toursForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="toursName" class="required">الاسم</label>
-                            <input type="text" id="toursName" name="toursName" required placeholder="أدخل اسمك">
+    <!-- المحتوى الرئيسي -->
+    <main>
+        <!-- محتوى صفحة تنظيم الرحلات -->
+        <div class="page-header">
+            <h1 class="page-title">تنظيم الرحلات والفعاليات</h1>
+            <p class="page-subtitle">تنظيم برامج سياحية مخصصة، حجوزات تذاكر معالم سياحية وفعاليات وأنشطة ترفيهية</p>
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+        </div>
+        
+        <div class="page-content">
+            <div class="container">
+                <div class="booking-section">
+                    <h2 class="section-title">طلب تنظيم رحلة/فعالية</h2>
+                    
+                    <form id="toursForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="toursName" class="required">الاسم</label>
+                                <input type="text" id="toursName" name="toursName" required placeholder="أدخل اسمك">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="toursPhone" class="required" style="text-align: right;">رقم الهاتف</label>
+                                <input type="tel" id="toursPhone" name="toursPhone" required placeholder="ادخل رقم الهاتف">
+                            </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="toursPhone" class="required" style="text-align: right;">رقم الهاتف</label>
-                            <input type="tel" id="toursPhone" name="toursPhone" required placeholder="ادخل رقم الهاتف">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="toursEmail">البريد الإلكتروني (اختياري)</label>
-                            <input type="email" id="toursEmail" name="toursEmail" placeholder="name@example.com">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="toursType" class="required">نوع الخدمة المطلوبة</label>
-                            <select id="toursType" name="toursType" required>
-                                <option value="">اختر نوع الخدمة</option>
-                                <option value="برنامج سياحي">برنامج سياحي مخصص</option>
-                                <option value="معالم سياحية">تذاكر معالم سياحية</option>
-                                <option value="فعاليات">حجوزات فعاليات وأنشطة</option>
-                                <option value="رحلات جماعية">رحلات جماعية منظمة</option>
-                                <option value="أخرى">أخرى</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="toursDestination" class="required">الوجهة المطلوبة</label>
-                            <input type="text" id="toursDestination" name="toursDestination" required placeholder="البلد أو المدينة">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="toursPeople" class="required">عدد الأشخاص</label>
-                            <input type="number" id="toursPeople" name="toursPeople" min="1" required placeholder="مثال: 4">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group date-time-input">
-                            <label for="toursStartDate" class="required">تاريخ السفر المتوقع</label>
-                            <input type="date" id="toursStartDate" name="toursStartDate" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="toursDuration">مدة الرحلة (أيام)</label>
-                            <input type="number" id="toursDuration" name="toursDuration" min="1" placeholder="مثال: 5">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="toursBudget">الميزانية التقريبية للشخص</label>
-                            <div class="budget-currency-container">
-                                <input type="number" id="toursBudget" name="toursBudget" placeholder="المبلغ">
-                                <select id="toursCurrency" name="toursCurrency">
-                                    <option value="دينار كويتي">دينار كويتي</option>
-                                    <option value="ريال سعودي">ريال سعودي</option>
-                                    <option value="درهم إماراتي">درهم إماراتي</option>
-                                    <option value="دولار أمريكي">دولار أمريكي</option>
-                                    <option value="يورو">يورو</option>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="toursEmail">البريد الإلكتروني (اختياري)</label>
+                                <input type="email" id="toursEmail" name="toursEmail" placeholder="name@example.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="toursType" class="required">نوع الخدمة المطلوبة</label>
+                                <select id="toursType" name="toursType" required>
+                                    <option value="">اختر نوع الخدمة</option>
+                                    <option value="برنامج سياحي">برنامج سياحي مخصص</option>
+                                    <option value="معالم سياحية">تذاكر معالم سياحية</option>
+                                    <option value="فعاليات">حجوزات فعاليات وأنشطة</option>
+                                    <option value="رحلات جماعية">رحلات جماعية منظمة</option>
+                                    <option value="أخرى">أخرى</option>
                                 </select>
                             </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="toursActivities" class="required">الأنشطة المطلوبة (يمكن اختيار أكثر من واحد)</label>
-                            <div class="checkbox-group">
-                                <div class="checkbox-item">
-                                    <input type="checkbox" id="activityHotel" name="tourActivity" value="حجز فنادق">
-                                    <label for="activityHotel">حجز فنادق</label>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="toursDestination" class="required">الوجهة المطلوبة</label>
+                                <input type="text" id="toursDestination" name="toursDestination" required placeholder="البلد أو المدينة">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="toursPeople" class="required">عدد الأشخاص</label>
+                                <input type="number" id="toursPeople" name="toursPeople" min="1" required placeholder="مثال: 4">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group date-time-input">
+                                <label for="toursStartDate" class="required">تاريخ السفر المتوقع</label>
+                                <input type="date" id="toursStartDate" name="toursStartDate" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="toursDuration">مدة الرحلة (أيام)</label>
+                                <input type="number" id="toursDuration" name="toursDuration" min="1" placeholder="مثال: 5">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="toursBudget">الميزانية التقريبية للشخص</label>
+                                <div class="budget-currency-container">
+                                    <input type="number" id="toursBudget" name="toursBudget" placeholder="المبلغ">
+                                    <select id="toursCurrency" name="toursCurrency">
+                                        <option value="دينار كويتي">دينار كويتي</option>
+                                        <option value="ريال سعودي">ريال سعودي</option>
+                                        <option value="درهم إماراتي">درهم إماراتي</option>
+                                        <option value="دولار أمريكي">دولار أمريكي</option>
+                                        <option value="يورو">يورو</option>
+                                    </select>
                                 </div>
-                                <div class="checkbox-item">
-                                    <input type="checkbox" id="activityTickets" name="tourActivity" value="تذاكر فعاليات">
-                                    <label for="activityTickets">تذاكر فعاليات</label>
-                                </div>
-                                <div class="checkbox-item">
-                                    <input type="checkbox" id="activityMonuments" name="tourActivity" value="معالم سياحية">
-                                    <label for="activityMonuments">معالم سياحية</label>
-                                </div>
-                                <div class="checkbox-item">
-                                    <input type="checkbox" id="activityTransport" name="tourActivity" value="مواصلات">
-                                    <label for="activityTransport">مواصلات</label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="toursActivities" class="required">الأنشطة المطلوبة (يمكن اختيار أكثر من واحد)</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="activityHotel" name="tourActivity" value="حجز فنادق">
+                                        <label for="activityHotel">حجز فنادق</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="activityTickets" name="tourActivity" value="تذاكر فعاليات">
+                                        <label for="activityTickets">تذاكر فعاليات</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="activityMonuments" name="tourActivity" value="معالم سياحية">
+                                        <label for="activityMonuments">معالم سياحية</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="activityTransport" name="tourActivity" value="مواصلات">
+                                        <label for="activityTransport">مواصلات</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="toursSpecialRequests">تفاصيل إضافية أو طلبات خاصة</label>
-                        <textarea id="toursSpecialRequests" name="toursSpecialRequests" rows="4" placeholder="اذكر أي تفاصيل إضافية مثل: المعالم المفضلة، نوع الفعاليات، متطلبات خاصة..."></textarea>
-                    </div>
-                    
-                    <div class="form-instructions">
-                        <h4><i class="fas fa-info-circle"></i> كيفية إكمال الحجز:</h4>
-                        <ol>
-                            <li>املأ جميع البيانات المطلوبة في النموذج أعلاه</li>
-                            <li>اضغط على زر "إرسال طلب تنظيم الرحلة"</li>
-                            <li>سيتم فتح تطبيق واتساب على جهازك تلقائياً</li>
-                            <li>ستجد الرسالة جاهزة مع كل بياناتك، فقط اضغط "إرسال"</li>
-                            <li>سنتصل بك خلال 24 ساعة لتأكيد الحجز وتفاصيل الدفع</li>
-                        </ol>
-                    </div>
-                    
-                    <!-- زر الإرسال في النهاية -->
-                    <div class="submit-btn-container">
-                        <button type="submit" class="submit-btn">
-                            <i class="fab fa-whatsapp whatsapp-icon"></i> إرسال طلب تنظيم الرحلة
-                        </button>
-                    </div>
-                </form>
+                        
+                        <div class="form-group">
+                            <label for="toursSpecialRequests">تفاصيل إضافية أو طلبات خاصة</label>
+                            <textarea id="toursSpecialRequests" name="toursSpecialRequests" rows="4" placeholder="اذكر أي تفاصيل إضافية مثل: المعالم المفضلة، نوع الفعاليات، متطلبات خاصة..."></textarea>
+                        </div>
+                        
+                        <div class="form-instructions">
+                            <h4><i class="fas fa-info-circle"></i> كيفية إكمال الحجز:</h4>
+                            <ol>
+                                <li>املأ جميع البيانات المطلوبة في النموذج أعلاه</li>
+                                <li>اضغط على زر "إرسال طلب تنظيم الرحلة"</li>
+                                <li>سيتم فتح تطبيق واتساب على جهازك تلقائياً</li>
+                                <li>ستجد الرسالة جاهزة مع كل بياناتك، فقط اضغط "إرسال"</li>
+                                <li>سنتصل بك خلال 24 ساعة لتأكيد الحجز وتفاصيل الدفع</li>
+                            </ol>
+                        </div>
+                        
+                        <!-- زر الإرسال في النهاية -->
+                        <div class="submit-btn-container">
+                            <button type="submit" class="submit-btn">
+                                <i class="fab fa-whatsapp whatsapp-icon"></i> إرسال طلب تنظيم الرحلة
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- الفوتر -->
     <footer class="footer">
@@ -267,6 +286,10 @@
         
         // ===== تهيئة الصفحة عند التحميل =====
         document.addEventListener('DOMContentLoaded', function() {
+            // إضافة مساحة للهيدر لمنع التداخل
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            document.querySelector('main').style.paddingTop = headerHeight + 'px';
+            
             // تعيين الحد الأدنى للتاريخ على اليوم الحالي
             const today = new Date().toISOString().split('T')[0];
             const toursStartDate = document.getElementById('toursStartDate');
@@ -373,7 +396,6 @@ ${data.toursSpecialRequests || 'لا توجد تفاصيل إضافية'}
         // ===== إخفاء الهيدر عند التمرير =====
         let lastScrollTop = 0;
         const header = document.querySelector('.header');
-        const banner = document.querySelector('.banner');
         
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -382,16 +404,9 @@ ${data.toursSpecialRequests || 'لا توجد تفاصيل إضافية'}
                 // التمرير لأسفل - إخفاء
                 header.style.transform = 'translateY(-100%)';
                 header.style.transition = 'transform 0.3s ease-in-out';
-                if (banner) {
-                    banner.style.transform = 'translateY(-100%)';
-                    banner.style.transition = 'transform 0.3s ease-in-out';
-                }
             } else {
                 // التمرير لأعلى - إظهار
                 header.style.transform = 'translateY(0)';
-                if (banner) {
-                    banner.style.transform = 'translateY(0)';
-                }
             }
             lastScrollTop = scrollTop;
         });
