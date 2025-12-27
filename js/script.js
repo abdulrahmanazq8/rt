@@ -1,20 +1,128 @@
-// فتح واتساب مع حل لمشكلة الموبايل
+// ===== دالة فتح واتساب =====
 function openWhatsApp(phoneNumber) {
     const message = "مرحباً، أريد الاستفسار عن خدمات راوند تريب";
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     
-    // حل لمشكلة فتح واتساب في الموبايل
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        // للأجهزة المحمولة، نفتح في نفس النافذة
         window.location.href = whatsappUrl;
     } else {
-        // لأجهزة الكمبيوتر، نفتح في نافذة جديدة
         window.open(whatsappUrl, '_blank');
     }
 }
 
-// تحسين اختيار التاريخ والوقت - يمكن النقر في أي مكان
+// ===== إصلاح مساحة الهيدر ديناميكياً =====
+function adjustHeaderSpace() {
+    const header = document.querySelector('.header');
+    const main = document.querySelector('main');
+    
+    if (header && main) {
+        const headerHeight = header.offsetHeight;
+        
+        // تحديد padding-top بناءً على حجم الشاشة
+        if (window.innerWidth <= 767) {
+            // للجوال - مساحة أكبر
+            main.style.paddingTop = (headerHeight + 30) + 'px';
+        } else if (window.innerWidth <= 992) {
+            // للأجهزة اللوحية
+            main.style.paddingTop = (headerHeight + 20) + 'px';
+        } else {
+            // لأجهزة الكمبيوتر
+            main.style.paddingTop = (headerHeight + 10) + 'px';
+        }
+    }
+}
+
+// ===== إخفاء الهيدر والبانر عند التمرير =====
+let lastScrollTop = 0;
+const header = document.querySelector('.header');
+const banner = document.querySelector('.banner');
+
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // التمرير لأسفل - إخفاء
+        if (header) {
+            header.classList.add('hidden');
+            header.style.transform = 'translateY(-100%)';
+        }
+        if (banner) {
+            banner.classList.add('hidden');
+            banner.style.transform = 'translateY(-100%)';
+        }
+    } else {
+        // التمرير لأعلى - إظهار
+        if (header) {
+            header.classList.remove('hidden');
+            header.style.transform = 'translateY(0)';
+        }
+        if (banner) {
+            banner.classList.remove('hidden');
+            banner.style.transform = 'translateY(0)';
+        }
+    }
+    
+    // إظهار الهيدر عند الوصول لأعلى الصفحة
+    if (scrollTop <= 50) {
+        if (header) {
+            header.classList.remove('hidden');
+            header.style.transform = 'translateY(0)';
+        }
+        if (banner) {
+            banner.classList.remove('hidden');
+            banner.style.transform = 'translateY(0)';
+        }
+    }
+    
+    lastScrollTop = scrollTop;
+});
+
+// ===== تهيئة الصفحة عند التحميل =====
+document.addEventListener('DOMContentLoaded', function() {
+    // إصلاح مساحة الهيدر
+    adjustHeaderSpace();
+    
+    // تحميل صورة البانر في حالة عدم وجودها
+    const banner = document.querySelector('.banner');
+    if (banner) {
+        const img = new Image();
+        img.src = 'images/banner.jpg';
+        img.onerror = function() {
+            banner.style.backgroundImage = `linear-gradient(rgba(85, 104, 89, 0.85), rgba(175, 181, 152, 0.8)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')`;
+        };
+    }
+    
+    // تحميل صورة اللوجو في حالة عدم وجودها
+    const logo = document.querySelector('.logo');
+    if (logo) {
+        logo.onerror = function() {
+            this.style.display = 'none';
+        };
+    }
+    
+    // تعيين الحد الأدنى للتاريخ على اليوم الحالي
+    const today = new Date().toISOString().split('T')[0];
+    const dateFields = [
+        'pickupDate', 'returnDate', 'hotelCheckIn', 'hotelCheckOut',
+        'honeymoonStartDate', 'toursStartDate', 'visaTravelDate'
+    ];
+    
+    dateFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            field.min = today;
+        }
+    });
+});
+
+// ===== تعديل مساحة الهيدر عند تغيير حجم النافذة =====
+window.addEventListener('resize', function() {
+    // تأخير التعديل قليلاً لاستقرار التغيير
+    setTimeout(adjustHeaderSpace, 100);
+});
+
+// ===== تحسين اختيار التاريخ والوقت - يمكن النقر في أي مكان =====
 document.addEventListener('DOMContentLoaded', function() {
     // جعل حقول التاريخ والوقت قابلة للنقر في أي مكان
     const dateTimeInputs = document.querySelectorAll('.date-time-input');
@@ -86,40 +194,9 @@ document.addEventListener('DOMContentLoaded', function() {
             hotelChildrenSelect.appendChild(option);
         }
     }
-    
-    // تعيين الحد الأدنى للتاريخ على اليوم الحالي
-    const today = new Date().toISOString().split('T')[0];
-    const dateFields = [
-        'pickupDate', 'returnDate', 'hotelCheckIn', 'hotelCheckOut',
-        'honeymoonStartDate', 'toursStartDate', 'visaTravelDate'
-    ];
-    
-    dateFields.forEach(fieldId => {
-        const field = document.getElementById(fieldId);
-        if (field) {
-            field.min = today;
-        }
-    });
-    
-    // تحميل صورة البانر في حالة عدم وجودها
-    const banner = document.querySelector('.banner');
-    if (banner) {
-        const img = new Image();
-        img.src = 'images/banner.jpg';
-        img.onerror = function() {
-            banner.style.backgroundImage = `linear-gradient(rgba(85, 104, 89, 0.85), rgba(175, 181, 152, 0.8)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')`;
-        };
-    }
-    
-    // إضافة مسافة للهيدر لمنع التداخل
-    const headerHeight = document.querySelector('.header').offsetHeight;
-    const mainElement = document.querySelector('main');
-    if (mainElement) {
-        mainElement.style.paddingTop = headerHeight + 'px';
-    }
 });
 
-// خيارات مكان التسليم
+// ===== خيارات مكان التسليم =====
 function selectReturnOption(option) {
     const options = document.querySelectorAll('.return-option');
     options.forEach(opt => opt.classList.remove('selected'));
@@ -139,7 +216,7 @@ function selectReturnOption(option) {
     }
 }
 
-// تفعيل خيارات أعمار الأطفال عند تحديد عددهم (صفحة تأجير السيارات)
+// ===== تفعيل خيارات أعمار الأطفال عند تحديد عددهم (صفحة تأجير السيارات) =====
 function toggleChildAges(count) {
     const childAgeGroup = document.getElementById('childAgeGroup');
     const childAgeInputs = document.getElementById('childAgeInputs');
@@ -175,7 +252,7 @@ function toggleChildAges(count) {
     }
 }
 
-// تفعيل خيارات أعمار الأطفال في الفنادق
+// ===== تفعيل خيارات أعمار الأطفال في الفنادق =====
 function toggleChildrenAges(count) {
     const container = document.getElementById('childrenAgesContainer');
     const inputs = document.getElementById('childrenAgeInputs');
@@ -213,7 +290,7 @@ function toggleChildrenAges(count) {
     }
 }
 
-// توزيع الأشخاص على الغرف في الفنادق
+// ===== توزيع الأشخاص على الغرف في الفنادق =====
 function toggleRoomOccupancy(roomCount) {
     const container = document.getElementById('roomOccupancyContainer');
     const inputs = document.getElementById('roomOccupancyInputs');
@@ -265,7 +342,7 @@ function toggleRoomOccupancy(roomCount) {
     }
 }
 
-// تفعيل خيارات أعمار الأطفال لكل غرفة
+// ===== تفعيل خيارات أعمار الأطفال لكل غرفة =====
 function toggleRoomChildAges(roomNumber, count) {
     const container = document.getElementById(`room${roomNumber}ChildrenAges`);
     const inputs = document.getElementById(`room${roomNumber}ChildAgeInputs`);
@@ -303,7 +380,7 @@ function toggleRoomChildAges(roomNumber, count) {
     }
 }
 
-// تحديث مكان التسليم عند تغيير مكان الاستلام
+// ===== تحديث مكان التسليم عند تغيير مكان الاستلام =====
 const pickupLocationInput = document.getElementById('pickupLocation');
 if (pickupLocationInput) {
     pickupLocationInput.addEventListener('input', function() {
@@ -313,7 +390,7 @@ if (pickupLocationInput) {
     });
 }
 
-// التحقق من حد الركاب في خدمة السائق
+// ===== التحقق من حد الركاب في خدمة السائق =====
 function checkDriverPassengerLimit(select) {
     const warning = document.getElementById('driverPassengerWarning');
     if (select && select.value === 'more') {
@@ -323,7 +400,7 @@ function checkDriverPassengerLimit(select) {
     }
 }
 
-// التحقق من حد الركاب في تأجير السيارات
+// ===== التحقق من حد الركاب في تأجير السيارات =====
 function checkPassengerLimit() {
     const totalAdults = parseInt(document.getElementById('totalAdults')?.value) || 0;
     const childrenCount = parseInt(document.getElementById('childrenCount')?.value) || 0;
@@ -343,7 +420,7 @@ function checkPassengerLimit() {
     return true;
 }
 
-// نماذج الإرسال - إصلاح مشكلة الرموز في واتساب
+// ===== نماذج الإرسال - إصلاح مشكلة الرموز في واتساب =====
 const carRentalForm = document.getElementById('carRentalForm');
 if (carRentalForm) {
     carRentalForm.addEventListener('submit', function(e) {
@@ -432,7 +509,7 @@ ${data.carNotes || 'لا توجد ملاحظات'}
     });
 }
 
-// نموذج خدمة السائق الخاص
+// ===== نموذج خدمة السائق الخاص =====
 const driverForm = document.getElementById('driverForm');
 if (driverForm) {
     driverForm.addEventListener('submit', function(e) {
@@ -498,7 +575,7 @@ ${data.driverPassengers === 'more' ? '*ملاحظة:* سيتم تخصيص سيا
     });
 }
 
-// نموذج شهر العسل
+// ===== نموذج شهر العسل =====
 const honeymoonForm = document.getElementById('honeymoonForm');
 if (honeymoonForm) {
     honeymoonForm.addEventListener('submit', function(e) {
@@ -559,7 +636,7 @@ ${data.honeymoonSpecialRequests || 'لا توجد طلبات خاصة'}
     });
 }
 
-// نموذج تنظيم الرحلات والفعاليات
+// ===== نموذج تنظيم الرحلات والفعاليات =====
 const toursForm = document.getElementById('toursForm');
 if (toursForm) {
     toursForm.addEventListener('submit', function(e) {
@@ -622,7 +699,7 @@ ${data.toursSpecialRequests || 'لا توجد تفاصيل إضافية'}
     });
 }
 
-// نموذج التأشيرات
+// ===== نموذج التأشيرات =====
 const visaForm = document.getElementById('visaForm');
 if (visaForm) {
     visaForm.addEventListener('submit', function(e) {
@@ -671,7 +748,7 @@ ${data.visaNotes || 'لا توجد ملاحظات'}
     });
 }
 
-// نموذج حجز الفنادق
+// ===== نموذج حجز الفنادق =====
 const hotelForm = document.getElementById('hotelForm');
 if (hotelForm) {
     hotelForm.addEventListener('submit', function(e) {
@@ -754,7 +831,7 @@ ${data.hotelSpecialRequests || 'لا توجد طلبات خاصة'}
     });
 }
 
-// دالة عامة لإرسال الرسائل عبر واتساب
+// ===== دالة عامة لإرسال الرسائل عبر واتساب =====
 function sendWhatsAppMessage(message) {
     const encodedMessage = encodeURIComponent(message);
     const companyWhatsappNumber = "96565750302";
@@ -775,30 +852,35 @@ function sendWhatsAppMessage(message) {
     }, 500);
 }
 
-// ===== إخفاء الهيدر والبانر عند التمرير =====
-let lastScrollTop = 0;
-const header = document.querySelector('.header');
-const banner = document.querySelector('.banner');
-
-window.addEventListener('scroll', function() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // إخفاء عند التمرير لأسفل، إظهار عند التمرير لأعلى
-    if (scrollTop > lastScrollTop && scrollTop > 100) {
-        // التمرير لأسفل - إخفاء الهيدر والبانر
-        if (header) header.classList.add('hidden');
-        if (banner) banner.classList.add('hidden');
-    } else {
-        // التمرير لأعلى - إظهار الهيدر والبانر
-        if (header) header.classList.remove('hidden');
-        if (banner) banner.classList.remove('hidden');
-    }
-    
-    // إظهار الهيدر عند الوصول لأعلى الصفحة
-    if (scrollTop <= 100) {
-        if (header) header.classList.remove('hidden');
-        if (banner) banner.classList.remove('hidden');
-    }
-    
-    lastScrollTop = scrollTop;
+// ===== تحسينات للجوال - منع التكبير في حقول الإدخال =====
+document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+        // منع التكبير في حقول الإدخال على الجوال
+        input.addEventListener('focus', function() {
+            if (window.innerWidth <= 767) {
+                setTimeout(() => {
+                    window.scrollTo(0, 0);
+                    document.body.style.zoom = 1;
+                }, 100);
+            }
+        });
+    });
 });
+
+// ===== تهيئة إضافية عند تحميل الصفحة بالكامل =====
+window.addEventListener('load', function() {
+    // إصلاح مساحة الهيدر بعد تحميل الصفحة بالكامل
+    setTimeout(adjustHeaderSpace, 500);
+    
+    // تحسين التمرير للجوال
+    if (window.innerWidth <= 767) {
+        document.documentElement.style.scrollBehavior = 'smooth';
+    }
+});
+
+// ===== إصلاح مشكلة الهيدر في iOS =====
+if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+    document.addEventListener('touchstart', function() {}, {passive: true});
+    document.addEventListener('scroll', adjustHeaderSpace, {passive: true});
+}
