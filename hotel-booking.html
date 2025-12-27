@@ -8,423 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        :root {
-            --olive-dark: #556859;
-            --sage-green: #AFB598;
-            --light-beige: #D0CEBB;
-            --black: #000000;
-            --white: #FFFFFF;
-            --primary: #556859;
-            --secondary: #AFB598;
-            --accent: #D0CEBB;
-            --dark: #000000;
-            --light: #f5f5f5;
-        }
-        
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-        }
-        
-        body {
-            line-height: 1.7;
-            color: var(--black);
-            background-color: var(--white);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            font-family: 'Cairo', sans-serif;
-            padding-top: 120px;
-        }
-        
-        .english-font {
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        /* الهيدر والشعار - مثبت في الأعلى */
-        .header {
-            background: linear-gradient(135deg, var(--olive-dark) 0%, var(--sage-green) 100%);
-            padding: 15px 5%;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            width: 100%;
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            cursor: pointer;
-        }
-        
-        .logo {
-            height: 70px;
-            width: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            object-fit: contain;
-            background-color: var(--light-beige);
-            padding: 5px;
-        }
-        
-        .company-info {
-            color: white;
-        }
-        
-        .company-name-ar {
-            font-size: 32px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        }
-        
-        .company-name-en {
-            font-size: 18px;
-            color: var(--light-beige);
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
-        
-        .company-tagline {
-            color: rgba(255,255,255,0.9);
-            font-size: 15px;
-            margin-top: 5px;
-            font-style: italic;
-        }
-        
-        .contact-header {
-            text-align: left;
-            color: white;
-        }
-        
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            font-size: 16px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            border: none;
-            cursor: pointer;
-        }
-        
-        .whatsapp-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-        }
-        
-        .phone-numbers-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .phone-number {
-            font-size: 20px;
-            color: white;
-            direction: ltr;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            background: rgba(255,255,255,0.1);
-            padding: 8px 15px;
-            border-radius: 8px;
-            backdrop-filter: blur(5px);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .phone-number:hover {
-            background: rgba(255,255,255,0.2);
-        }
-        
-        .phone-number a {
-            color: white;
-            text-decoration: none;
-            direction: ltr;
-            display: inline-block;
-            flex: 1;
-            font-size: 20px;
-        }
-        
-        .flag-icon {
-            width: 24px;
-            height: 16px;
-            border-radius: 3px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        /* رأس الصفحة الداخلية */
-        .page-header {
-            background: linear-gradient(135deg, var(--olive-dark), var(--sage-green));
-            color: white;
-            padding: 80px 5% 60px;
-            text-align: center;
-            border-radius: 0 0 30px 30px;
-            margin-bottom: 50px;
-            margin-top: -20px;
-        }
-        
-        .page-title {
-            font-size: 42px;
-            margin-bottom: 15px;
-        }
-        
-        .page-subtitle {
-            font-size: 20px;
-            opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .back-btn {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 2px solid white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-            font-size: 18px;
-            text-decoration: none;
-        }
-        
-        .back-btn:hover {
-            background: white;
-            color: var(--olive-dark);
-        }
-        
-        .page-content {
-            max-width: 1200px;
-            margin: 0 auto 80px;
-            padding: 0 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .section-title {
-            text-align: center;
-            color: var(--olive-dark);
-            margin-bottom: 50px;
-            font-size: 36px;
-            position: relative;
-            padding-bottom: 20px;
-        }
-        
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(to right, var(--sage-green), var(--light-beige));
-            margin: 15px auto;
-            border-radius: 2px;
-        }
-        
-        /* نموذج الحجز */
-        .booking-section {
-            background: var(--white);
-            border-radius: 25px;
-            padding: 50px;
-            margin: 80px auto;
-            max-width: 850px;
-            box-shadow: 0 15px 40px rgba(85, 104, 89, 0.1);
-            border: 2px solid var(--light-beige);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .booking-section:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 8px;
-            background: linear-gradient(to left, var(--sage-green), var(--olive-dark));
-        }
-        
-        .form-group {
-            margin-bottom: 30px;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-        
-        @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 10px;
-            color: var(--olive-dark);
-            font-weight: 700;
-            font-size: 16px;
-        }
-        
-        .required:after {
-            content: " *";
-            color: #e74c3c;
-        }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: 16px 20px;
-            border: 2px solid var(--light-beige);
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s;
-            background: #f8fafc;
-            font-family: 'Cairo', sans-serif;
-            text-align: right;
-            cursor: pointer;
-        }
-        
-        /* حقول التاريخ والوقت */
-        .date-time-input {
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .date-time-input input {
-            cursor: pointer;
-            background-color: white;
-        }
-        
-        .date-time-input:after {
-            content: '\f073';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--olive-dark);
-            pointer-events: none;
-            font-size: 18px;
-        }
-        
-        .submit-btn-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 40px;
-        }
-        
-        .submit-btn {
-            background: linear-gradient(135deg, var(--sage-green), var(--olive-dark));
-            color: white;
-            border: none;
-            padding: 20px 45px;
-            font-size: 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            width: 100%;
-            max-width: 400px;
-            font-weight: bold;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            letter-spacing: 1px;
-            font-family: 'Cairo', sans-serif;
-        }
-        
-        .submit-btn:hover {
-            background: linear-gradient(135deg, var(--olive-dark), var(--sage-green));
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(85, 104, 89, 0.3);
-        }
-        
-        .whatsapp-icon {
-            font-size: 24px;
-        }
-        
-        /* التوجيهات داخل النماذج */
-        .form-instructions {
-            background: var(--light-beige);
-            border-radius: 12px;
-            padding: 25px;
-            margin-top: 30px;
-            border-right: 5px solid var(--sage-green);
-        }
-        
-        .form-instructions h4 {
-            color: var(--olive-dark);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .form-instructions ol {
-            padding-right: 20px;
-            line-height: 2;
-        }
-        
-        /* توزيع الأشخاص على الغرف */
-        .room-occupancy {
-            display: none;
-            margin-top: 15px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border: 1px solid #e9ecef;
-        }
-        
-        .room-occupancy-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e9ecef;
-        }
-        
-        .room-occupancy-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        .room-occupancy-item h5 {
-            color: var(--olive-dark);
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        
-        /* خيارات أعمار الأطفال في الفنادق */
+        /* إضافات خاصة بصفحة الفنادق */
         .children-ages-container {
             display: none;
             margin-top: 15px;
@@ -439,181 +25,6 @@
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             gap: 10px;
             margin-top: 10px;
-        }
-        
-        /* الفوتر */
-        .footer {
-            background: linear-gradient(135deg, var(--olive-dark) 0%, #445a4a 100%);
-            color: white;
-            padding: 70px 5% 30px;
-            margin-top: 80px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 50px;
-            max-width: 1200px;
-            margin: 0 auto 50px;
-        }
-        
-        .footer-section h3 {
-            font-size: 22px;
-            margin-bottom: 25px;
-            color: var(--light-beige);
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(255,255,255,0.1);
-        }
-        
-        .footer-contact {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .footer-contact-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-        
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-icons a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            color: white;
-            font-size: 20px;
-            transition: all 0.3s;
-        }
-        
-        .social-icons a:hover {
-            background: var(--light-beige);
-            color: var(--olive-dark);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.7);
-            font-size: 15px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        /* تأثيرات إضافية */
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
-            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-        
-        /* تحسين ظهور القوائم المنسدلة */
-        select {
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23556859' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: left 15px center;
-            background-size: 12px;
-            padding-left: 40px;
-        }
-        
-        /* التجاوب */
-        @media (max-width: 992px) {
-            .header {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-                padding-top: 20px;
-                padding-bottom: 20px;
-                position: fixed;
-            }
-            
-            .contact-header {
-                text-align: center;
-            }
-            
-            .booking-section {
-                padding: 30px 20px;
-                margin: 40px 15px;
-            }
-            
-            .page-title {
-                font-size: 32px;
-            }
-            
-            body {
-                padding-top: 150px;
-            }
-            
-            .phone-numbers-container {
-                align-items: center;
-            }
-            
-            .phone-number {
-                font-size: 16px;
-                padding: 8px 12px;
-            }
-            
-            .phone-number a {
-                font-size: 16px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            body {
-                padding-top: 160px;
-            }
-            
-            .section-title {
-                font-size: 24px;
-            }
-            
-            .form-group {
-                margin-bottom: 20px;
-            }
-            
-            .header {
-                padding: 10px 5%;
-            }
-            
-            .logo {
-                height: 50px;
-            }
-            
-            .company-name-ar {
-                font-size: 24px;
-            }
-            
-            .company-name-en {
-                font-size: 14px;
-            }
-            
-            .company-tagline {
-                font-size: 12px;
-            }
-            
-            .page-header {
-                padding: 60px 5% 40px;
-            }
         }
     </style>
 </head>
@@ -705,7 +116,11 @@
                             <label for="hotelRooms" class="required">عدد الغرف</label>
                             <select id="hotelRooms" name="hotelRooms" required onchange="toggleRoomOccupancy(this.value)">
                                 <option value="">اختر عدد الغرف</option>
-                                <!-- سيتم تعبئتها بـ JavaScript -->
+                                <option value="1">1 غرفة</option>
+                                <option value="2">2 غرف</option>
+                                <option value="3">3 غرف</option>
+                                <option value="4">4 غرف</option>
+                                <option value="5">5 غرف أو أكثر</option>
                             </select>
                         </div>
                         
@@ -713,15 +128,13 @@
                             <label for="hotelChildren">عدد الأطفال</label>
                             <select id="hotelChildren" name="hotelChildren" onchange="toggleChildrenAges(this.value)">
                                 <option value="0">0 - لا يوجد أطفال</option>
-                                <!-- سيتم تعبئتها بـ JavaScript -->
+                                <option value="1">1 طفل</option>
+                                <option value="2">2 أطفال</option>
+                                <option value="3">3 أطفال</option>
+                                <option value="4">4 أطفال</option>
+                                <option value="5">5 أطفال أو أكثر</option>
                             </select>
                         </div>
-                    </div>
-                    
-                    <!-- توزيع الأشخاص على الغرف -->
-                    <div id="roomOccupancyContainer" class="room-occupancy">
-                        <label>توزيع الأشخاص على الغرف</label>
-                        <div id="roomOccupancyInputs"></div>
                     </div>
                     
                     <!-- أعمار الأطفال -->
@@ -758,6 +171,7 @@
                         </ol>
                     </div>
                     
+                    <!-- زر الإرسال في النهاية -->
                     <div class="submit-btn-container">
                         <button type="submit" class="submit-btn">
                             <i class="fab fa-whatsapp whatsapp-icon"></i> إرسال طلب حجز الفندق
@@ -814,7 +228,7 @@
     </footer>
 
     <script>
-        // فتح واتساب
+        // ===== دالة فتح واتساب =====
         function openWhatsApp(phoneNumber) {
             const message = "مرحباً، أريد الاستفسار عن خدمات راوند تريب";
             const encodedMessage = encodeURIComponent(message);
@@ -827,8 +241,207 @@
             }
         }
         
+        // ===== تهيئة الصفحة عند التحميل =====
         document.addEventListener('DOMContentLoaded', function() {
-            // تعبئة خيارات عدد الغرف (1-8)
-            const hotelRoomsSelect = document.getElementById('hotelRooms');
-            if (hotelRoomsSelect) {
-                for (let i = 1; i <=
+            // إضافة padding-top للـ body يعتمد على ارتفاع الهيدر
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            document.body.style.paddingTop = headerHeight + 'px';
+            
+            // تعيين الحد الأدنى للتاريخ على اليوم الحالي
+            const today = new Date().toISOString().split('T')[0];
+            const hotelCheckIn = document.getElementById('hotelCheckIn');
+            const hotelCheckOut = document.getElementById('hotelCheckOut');
+            
+            if (hotelCheckIn) hotelCheckIn.min = today;
+            if (hotelCheckOut) hotelCheckOut.min = today;
+            
+            // تحميل صورة اللوجو في حالة عدم وجودها
+            const logo = document.querySelector('.logo');
+            if (logo) {
+                logo.onerror = function() {
+                    this.style.display = 'none';
+                };
+            }
+            
+            // التحقق من التواريخ عند التغيير
+            if (hotelCheckIn && hotelCheckOut) {
+                hotelCheckIn.addEventListener('change', function() {
+                    hotelCheckOut.min = this.value;
+                    if (hotelCheckOut.value && hotelCheckOut.value < this.value) {
+                        hotelCheckOut.value = this.value;
+                    }
+                });
+                
+                hotelCheckOut.addEventListener('change', function() {
+                    if (this.value < hotelCheckIn.value) {
+                        alert('❌ خطأ: تاريخ المغادرة يجب أن يكون بعد تاريخ الوصول');
+                        this.value = hotelCheckIn.value;
+                    }
+                });
+            }
+        });
+        
+        // ===== إخفاء الهيدر عند التمرير =====
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // التمرير لأسفل - إخفاء
+                if (header) header.classList.add('hidden');
+            } else {
+                // التمرير لأعلى - إظهار
+                if (header) header.classList.remove('hidden');
+            }
+            lastScrollTop = scrollTop;
+        });
+        
+        // ===== تفعيل خيارات أعمار الأطفال =====
+        function toggleChildrenAges(count) {
+            const childrenAgesContainer = document.getElementById('childrenAgesContainer');
+            const childrenAgeInputs = document.getElementById('childrenAgeInputs');
+            
+            if (parseInt(count) > 0) {
+                childrenAgesContainer.style.display = 'block';
+                childrenAgeInputs.innerHTML = '';
+                
+                for (let i = 1; i <= parseInt(count); i++) {
+                    const ageSelect = document.createElement('div');
+                    ageSelect.className = 'form-group';
+                    ageSelect.innerHTML = `
+                        <label for="childAge${i}">عمر الطفل ${i}</label>
+                        <select id="childAge${i}" name="childAge${i}">
+                            <option value="">اختر العمر</option>
+                            <option value="1">1 سنة</option>
+                            <option value="2">2 سنوات</option>
+                            <option value="3">3 سنوات</option>
+                            <option value="4">4 سنوات</option>
+                            <option value="5">5 سنوات</option>
+                            <option value="6">6 سنوات</option>
+                            <option value="7">7 سنوات</option>
+                            <option value="8">8 سنوات</option>
+                            <option value="9">9 سنوات</option>
+                            <option value="10">10 سنوات</option>
+                            <option value="11">11 سنة</option>
+                            <option value="12">12 سنة</option>
+                        </select>
+                    `;
+                    childrenAgeInputs.appendChild(ageSelect);
+                }
+            } else {
+                childrenAgesContainer.style.display = 'none';
+                childrenAgeInputs.innerHTML = '';
+            }
+        }
+        
+        // ===== توزيع الأشخاص على الغرف =====
+        function toggleRoomOccupancy(roomsCount) {
+            // يمكن إضافة هذه الوظيفة إذا لزم الأمر
+        }
+        
+        // ===== التحقق من التواريخ قبل الإرسال =====
+        function validateHotelDates() {
+            const checkIn = document.getElementById('hotelCheckIn');
+            const checkOut = document.getElementById('hotelCheckOut');
+            
+            if (!checkIn || !checkOut) return true;
+            
+            const checkInDate = new Date(checkIn.value);
+            const checkOutDate = new Date(checkOut.value);
+            
+            if (checkOutDate <= checkInDate) {
+                alert('❌ خطأ: تاريخ المغادرة يجب أن يكون بعد تاريخ الوصول');
+                checkOut.focus();
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // ===== معالجة إرسال النموذج =====
+        document.getElementById('hotelForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // التحقق من التواريخ
+            if (!validateHotelDates()) {
+                return;
+            }
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const data = {};
+            const childAges = [];
+            
+            // جمع بيانات أعمار الأطفال
+            const childrenCount = parseInt(formData.get('hotelChildren') || 0);
+            for (let i = 1; i <= childrenCount; i++) {
+                const age = formData.get(`childAge${i}`);
+                if (age) childAges.push(age + ' سنوات');
+            }
+            
+            formData.forEach((value, key) => {
+                if (!key.startsWith('childAge')) {
+                    data[key] = value;
+                }
+            });
+            
+            const childrenInfo = childrenCount > 0 ? `${childrenCount} طفل، أعمارهم: ${childAges.join('، ')}` : 'لا يوجد أطفال';
+            
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            }).replace(',', '');
+            
+            const message = `*طلب حجز فندق - راوند تريب*
+
+*المعلومات الشخصية:*
+• الاسم: ${data.hotelName || 'غير محدد'}
+• رقم التواصل: ${data.hotelPhone || 'غير محدد'}
+• البريد: ${data.hotelEmail || 'غير محدد'}
+
+*تفاصيل الحجز:*
+• الوجهة: ${data.hotelDestination || 'غير محدد'}
+• تاريخ الوصول: ${data.hotelCheckIn || 'غير محدد'}
+• تاريخ المغادرة: ${data.hotelCheckOut || 'غير محدد'}
+• عدد الغرف: ${data.hotelRooms || 'غير محدد'}
+• الأطفال: ${childrenInfo}
+• نوع الفندق المفضل: ${data.hotelType || 'غير محدد'}
+
+*طلبات خاصة:*
+${data.hotelSpecialRequests || 'لا توجد طلبات خاصة'}
+
+*تم إرسال الطلب في:* ${formattedDate}
+*رقم التواصل:* ${data.hotelPhone || 'غير محدد'}
+
+--- راوند تريب - خدمة حجوزات الفنادق ---`;
+            
+            sendWhatsAppMessage(message);
+            setTimeout(() => form.reset(), 2000);
+        });
+        
+        // ===== دالة عامة لإرسال الرسائل عبر واتساب =====
+        function sendWhatsAppMessage(message) {
+            const encodedMessage = encodeURIComponent(message);
+            const companyWhatsappNumber = "96565750302";
+            const whatsappUrl = `https://wa.me/${companyWhatsappNumber}?text=${encodedMessage}`;
+            
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                window.location.href = whatsappUrl;
+            } else {
+                window.open(whatsappUrl, '_blank');
+            }
+            
+            setTimeout(() => {
+                alert('✅ تم تجهيز طلبك بنجاح!\n\nسيتم الآن فتح تطبيق واتساب. تأكد من ظهور جميع بياناتك في الرسالة ثم انقر على زر الإرسال.\n\nشكراً لاختيارك راوند تريب!');
+            }, 500);
+        }
+    </script>
+</body>
+</html>
