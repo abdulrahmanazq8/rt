@@ -25,6 +25,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Cairo', sans-serif;
+    padding-top: 120px; /* إضافة هذا السطر */
 }
 
 .english-font {
@@ -36,13 +37,16 @@ body {
     background: linear-gradient(135deg, var(--olive-dark) 0%, var(--sage-green) 100%);
     padding: 15px 5%;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    position: sticky;
+    position: fixed; /* تغيير من sticky إلى fixed */
     top: 0;
+    left: 0; /* إضافة */
+    right: 0; /* إضافة */
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    width: 100%; /* إضافة */
 }
 
 .logo-container {
@@ -162,7 +166,7 @@ body {
 /* البانر - إصلاح مشكلة التثبيت */
 .banner {
     height: 500px;
-    background: linear-gradient(rgba(85, 104, 89, 0.85), rgba(175, 181, 152, 0.8)), url('../banner.jpg');
+    background: linear-gradient(rgba(85, 104, 89, 0.85), rgba(175, 181, 152, 0.8)), url('images/banner.jpg'); /* تعديل المسار */
     background-size: cover;
     background-position: center;
     display: flex;
@@ -172,6 +176,7 @@ body {
     color: white;
     padding: 0 20px;
     position: relative;
+    margin-top: 20px; /* إضافة */
 }
 
 .banner-content {
@@ -341,10 +346,11 @@ body {
 .page-header {
     background: linear-gradient(135deg, var(--olive-dark), var(--sage-green));
     color: white;
-    padding: 60px 5%;
+    padding: 80px 5% 60px; /* زيادة padding */
     text-align: center;
     border-radius: 0 0 30px 30px;
     margin-bottom: 50px;
+    margin-top: -20px; /* إضافة */
 }
 
 .page-title {
@@ -523,6 +529,12 @@ input, select, textarea {
     content: '\f017';
 }
 
+.submit-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px; /* إضافة */
+}
+
 .submit-btn {
     background: linear-gradient(135deg, var(--sage-green), var(--olive-dark));
     color: white;
@@ -532,13 +544,13 @@ input, select, textarea {
     border-radius: 12px;
     cursor: pointer;
     width: 100%;
+    max-width: 400px; /* إضافة */
     font-weight: bold;
     transition: all 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    margin-top: 20px;
     letter-spacing: 1px;
     font-family: 'Cairo', sans-serif;
 }
@@ -816,6 +828,7 @@ input, select, textarea {
     
     .banner {
         height: 400px;
+        margin-top: 150px; /* إضافة */
     }
     
     .banner h1 {
@@ -859,11 +872,16 @@ input, select, textarea {
     .phone-number a {
         font-size: 16px;
     }
+    
+    body {
+        padding-top: 150px; /* إضافة */
+    }
 }
 
 @media (max-width: 576px) {
     .banner {
         height: 350px;
+        margin-top: 140px; /* إضافة */
     }
     
     .banner h1 {
@@ -892,6 +910,10 @@ input, select, textarea {
     
     .form-group {
         margin-bottom: 20px;
+    }
+    
+    body {
+        padding-top: 160px; /* إضافة */
     }
 }
 
