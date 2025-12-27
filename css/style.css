@@ -25,7 +25,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Cairo', sans-serif;
-    padding-top: 0; /* تم إزالته ليكون للـ header المتحرك */
+    padding-top: 0; /* تمت إزالته للتحكم بـ JS */
 }
 
 .english-font {
@@ -48,6 +48,10 @@ body {
     flex-wrap: wrap;
     width: 100%;
     transition: transform 0.3s ease-in-out;
+}
+
+.header.hidden {
+    transform: translateY(-100%);
 }
 
 .logo-container {
@@ -176,8 +180,11 @@ body {
     color: white;
     padding: 0 20px;
     position: relative;
-    margin-top: 80px; /* مسافة بعد الـ header */
     transition: transform 0.3s ease-in-out, margin-top 0.3s ease-in-out;
+}
+
+.banner.hidden {
+    transform: translateY(-100%);
 }
 
 .banner-content {
@@ -334,20 +341,10 @@ body {
 }
 
 /* ===== الصفحات الداخلية ===== */
-.internal-page {
-    display: none;
-    animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
 .page-header {
     background: linear-gradient(135deg, var(--olive-dark), var(--sage-green));
     color: white;
-    padding: 100px 5% 60px; /* زيادة الـ top padding */
+    padding: 100px 5% 60px;
     text-align: center;
     border-radius: 0 0 30px 30px;
     margin-bottom: 50px;
@@ -501,7 +498,7 @@ input, select, textarea {
     cursor: pointer;
 }
 
-/* تحسين حقول التاريخ والوقت - أصبحت قابلة للنقر في أي مكان */
+/* تحسين حقول التاريخ والوقت */
 .date-time-input {
     position: relative;
     cursor: pointer;
@@ -529,7 +526,7 @@ input, select, textarea {
     content: '\f017';
 }
 
-/* ===== حاوية زر الإرسال (الجديدة) ===== */
+/* ===== حاوية زر الإرسال ===== */
 .submit-btn-container {
     display: flex;
     justify-content: center;
@@ -644,7 +641,7 @@ input, select, textarea {
     margin-top: 5px;
 }
 
-/* ===== خيارات أعمار الأطفال المخفية ===== */
+/* ===== خيارات أعمار الأطفال ===== */
 .child-age-group {
     display: none;
     margin-top: 15px;
@@ -699,7 +696,7 @@ input, select, textarea {
     font-size: 16px;
 }
 
-/* ===== خيارات أعمار الأطفال في الفنادق ===== */
+/* ===== أعمار الأطفال في الفنادق ===== */
 .children-ages-container {
     display: none;
     margin-top: 15px;
@@ -873,7 +870,7 @@ select {
     border: 1px solid #fcc;
 }
 
-/* ===== التجاوب للجوال ===== */
+/* ===== التجاوب ===== */
 @media (max-width: 992px) {
     .header {
         flex-direction: column;
@@ -889,7 +886,6 @@ select {
     
     .banner {
         height: 400px;
-        margin-top: 120px; /* زيادة المسافة للجوال */
     }
     
     .banner h1 {
@@ -935,14 +931,13 @@ select {
     }
     
     .page-header {
-        padding: 120px 5% 40px; /* زيادة لتعويض الـ header */
+        padding: 120px 5% 40px;
     }
 }
 
 @media (max-width: 576px) {
     .banner {
         height: 350px;
-        margin-top: 140px;
     }
     
     .banner h1 {
