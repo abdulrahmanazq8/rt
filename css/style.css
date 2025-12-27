@@ -25,28 +25,29 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Cairo', sans-serif;
-    padding-top: 120px; /* إضافة هذا السطر */
+    padding-top: 0; /* تم إزالته ليكون للـ header المتحرك */
 }
 
 .english-font {
     font-family: 'Montserrat', sans-serif;
 }
 
-/* الهيدر والشعار */
+/* ===== الهيدر المتحرك ===== */
 .header {
     background: linear-gradient(135deg, var(--olive-dark) 0%, var(--sage-green) 100%);
     padding: 15px 5%;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    position: fixed; /* تغيير من sticky إلى fixed */
+    position: fixed;
     top: 0;
-    left: 0; /* إضافة */
-    right: 0; /* إضافة */
+    left: 0;
+    right: 0;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    width: 100%; /* إضافة */
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
 }
 
 .logo-container {
@@ -119,7 +120,6 @@ body {
     box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
 }
 
-/* إعادة عرض أرقام الهاتف في الهيدر */
 .phone-numbers-container {
     display: flex;
     flex-direction: column;
@@ -163,10 +163,10 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* البانر - إصلاح مشكلة التثبيت */
+/* ===== البانر المتحرك ===== */
 .banner {
     height: 500px;
-    background: linear-gradient(rgba(85, 104, 89, 0.85), rgba(175, 181, 152, 0.8)), url('images/banner.jpg'); /* تعديل المسار */
+    background: linear-gradient(rgba(85, 104, 89, 0.85), rgba(175, 181, 152, 0.8)), url('images/banner.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -176,7 +176,8 @@ body {
     color: white;
     padding: 0 20px;
     position: relative;
-    margin-top: 20px; /* إضافة */
+    margin-top: 80px; /* مسافة بعد الـ header */
+    transition: transform 0.3s ease-in-out, margin-top 0.3s ease-in-out;
 }
 
 .banner-content {
@@ -216,7 +217,7 @@ body {
     margin-right: auto;
 }
 
-/* الخدمات */
+/* ===== الخدمات ===== */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -332,7 +333,7 @@ body {
     border-color: var(--olive-dark);
 }
 
-/* الصفحات الداخلية */
+/* ===== الصفحات الداخلية ===== */
 .internal-page {
     display: none;
     animation: fadeIn 0.5s ease-out;
@@ -346,11 +347,10 @@ body {
 .page-header {
     background: linear-gradient(135deg, var(--olive-dark), var(--sage-green));
     color: white;
-    padding: 80px 5% 60px; /* زيادة padding */
+    padding: 100px 5% 60px; /* زيادة الـ top padding */
     text-align: center;
     border-radius: 0 0 30px 30px;
     margin-bottom: 50px;
-    margin-top: -20px; /* إضافة */
 }
 
 .page-title {
@@ -393,7 +393,7 @@ body {
     padding: 0 20px;
 }
 
-/* تأجير سيارات مع سائق خاص */
+/* ===== تأجير سيارات مع سائق خاص ===== */
 .driver-service-section {
     background: var(--white);
     border-radius: 25px;
@@ -436,7 +436,7 @@ body {
     margin-bottom: 15px;
 }
 
-/* نموذج الحجز */
+/* ===== نموذج الحجز ===== */
 .booking-section {
     background: var(--white);
     border-radius: 25px;
@@ -529,10 +529,11 @@ input, select, textarea {
     content: '\f017';
 }
 
+/* ===== حاوية زر الإرسال (الجديدة) ===== */
 .submit-btn-container {
     display: flex;
     justify-content: center;
-    margin-top: 40px; /* إضافة */
+    margin-top: 40px;
 }
 
 .submit-btn {
@@ -544,7 +545,7 @@ input, select, textarea {
     border-radius: 12px;
     cursor: pointer;
     width: 100%;
-    max-width: 400px; /* إضافة */
+    max-width: 400px;
     font-weight: bold;
     transition: all 0.3s;
     display: flex;
@@ -565,12 +566,12 @@ input, select, textarea {
     font-size: 24px;
 }
 
-/* التوجيهات داخل النماذج */
+/* ===== التوجيهات داخل النماذج ===== */
 .form-instructions {
     background: var(--light-beige);
     border-radius: 12px;
     padding: 25px;
-    margin-top: 30px;
+    margin-top: 40px;
     border-right: 5px solid var(--sage-green);
 }
 
@@ -587,7 +588,7 @@ input, select, textarea {
     line-height: 2;
 }
 
-/* خيارات متعددة */
+/* ===== خيارات متعددة ===== */
 .checkbox-group {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -605,7 +606,7 @@ input, select, textarea {
     width: auto;
 }
 
-/* الشروط العامة */
+/* ===== الشروط العامة ===== */
 .terms-section {
     background: var(--light-beige);
     border-radius: 15px;
@@ -643,7 +644,7 @@ input, select, textarea {
     margin-top: 5px;
 }
 
-/* خيارات أعمار الأطفال المخفية */
+/* ===== خيارات أعمار الأطفال المخفية ===== */
 .child-age-group {
     display: none;
     margin-top: 15px;
@@ -657,7 +658,7 @@ input, select, textarea {
     margin-top: 10px;
 }
 
-/* توزيع الأشخاص على الغرف */
+/* ===== توزيع الأشخاص على الغرف ===== */
 .room-distribution {
     display: none;
     margin-top: 15px;
@@ -698,7 +699,7 @@ input, select, textarea {
     font-size: 16px;
 }
 
-/* خيارات أعمار الأطفال في الفنادق */
+/* ===== خيارات أعمار الأطفال في الفنادق ===== */
 .children-ages-container {
     display: none;
     margin-top: 15px;
@@ -715,7 +716,7 @@ input, select, textarea {
     margin-top: 10px;
 }
 
-/* خيارات مكان التسليم */
+/* ===== خيارات مكان التسليم ===== */
 .return-options {
     display: flex;
     gap: 15px;
@@ -741,7 +742,7 @@ input, select, textarea {
     background-color: rgba(85, 104, 89, 0.05);
 }
 
-/* الفوتر */
+/* ===== الفوتر ===== */
 .footer {
     background: linear-gradient(135deg, var(--olive-dark) 0%, #445a4a 100%);
     color: white;
@@ -812,14 +813,74 @@ input, select, textarea {
     margin: 0 auto;
 }
 
-/* التجاوب */
+/* ===== تأثيرات إضافية ===== */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+    70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* ===== تحسين ظهور القوائم المنسدلة ===== */
+select {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23556859' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 15px center;
+    background-size: 12px;
+    padding-left: 40px;
+}
+
+/* ===== تنسيق حقول الميزانية ===== */
+.budget-currency-container {
+    display: flex;
+    gap: 10px;
+}
+
+.budget-currency-container input {
+    flex: 1;
+}
+
+.budget-currency-container select {
+    width: 150px;
+}
+
+@media (max-width: 768px) {
+    .budget-currency-container {
+        flex-direction: column;
+    }
+    
+    .budget-currency-container select {
+        width: 100%;
+    }
+}
+
+/* ===== رسالة الخطأ ===== */
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+    padding: 8px;
+    background-color: #fee;
+    border-radius: 5px;
+    border: 1px solid #fcc;
+}
+
+/* ===== التجاوب للجوال ===== */
 @media (max-width: 992px) {
     .header {
         flex-direction: column;
         text-align: center;
         gap: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
     
     .contact-header {
@@ -828,7 +889,7 @@ input, select, textarea {
     
     .banner {
         height: 400px;
-        margin-top: 150px; /* إضافة */
+        margin-top: 120px; /* زيادة المسافة للجوال */
     }
     
     .banner h1 {
@@ -873,15 +934,15 @@ input, select, textarea {
         font-size: 16px;
     }
     
-    body {
-        padding-top: 150px; /* إضافة */
+    .page-header {
+        padding: 120px 5% 40px; /* زيادة لتعويض الـ header */
     }
 }
 
 @media (max-width: 576px) {
     .banner {
         height: 350px;
-        margin-top: 140px; /* إضافة */
+        margin-top: 140px;
     }
     
     .banner h1 {
@@ -912,57 +973,15 @@ input, select, textarea {
         margin-bottom: 20px;
     }
     
-    body {
-        padding-top: 160px; /* إضافة */
+    .return-options {
+        flex-direction: column;
     }
-}
-
-/* تأثيرات إضافية */
-.pulse {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
-    70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-}
-
-/* تحسين ظهور القوائم المنسدلة */
-select {
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23556859' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: left 15px center;
-    background-size: 12px;
-    padding-left: 40px;
-}
-
-/* تنسيق حقول الميزانية */
-.budget-currency-container {
-    display: flex;
-    gap: 10px;
-}
-
-.budget-currency-container input {
-    flex: 1;
-}
-
-.budget-currency-container select {
-    width: 150px;
-}
-
-/* رسالة الخطأ */
-.error-message {
-    color: #e74c3c;
-    font-size: 14px;
-    margin-top: 5px;
-    display: none;
-    padding: 8px;
-    background-color: #fee;
-    border-radius: 5px;
-    border: 1px solid #fcc;
+    
+    .driver-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .page-header {
+        padding: 120px 5% 30px;
+    }
 }
